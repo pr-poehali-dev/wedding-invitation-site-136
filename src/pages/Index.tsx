@@ -1,12 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import Icon from "@/components/ui/icon";
 
-const WEDDING_DATE = new Date("2026-08-30T14:00:00");
+const WEDDING_DATE = new Date("2026-08-30T16:00:00");
+const RSVP_URL = "https://functions.poehali.dev/a94d2141-f6b5-4e60-860b-2ecdc7bb5b3a";
 
 function useCountdown(targetDate: Date) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  const prevRef = useRef({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-
   useEffect(() => {
     const calc = () => {
       const diff = targetDate.getTime() - Date.now();
@@ -19,29 +18,22 @@ function useCountdown(targetDate: Date) {
       };
     };
     setTimeLeft(calc());
-    const id = setInterval(() => {
-      const next = calc();
-      prevRef.current = timeLeft;
-      setTimeLeft(next);
-    }, 1000);
+    const id = setInterval(() => setTimeLeft(calc()), 1000);
     return () => clearInterval(id);
   }, [targetDate]);
-
-  return { timeLeft, prev: prevRef.current };
+  return timeLeft;
 }
 
 function CountdownUnit({ value, label }: { value: number; label: string }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="glass-card px-4 py-3 md:px-6 md:py-4 min-w-[70px] md:min-w-[90px] flex items-center justify-center relative overflow-hidden">
-        <span className="font-display text-4xl md:text-6xl font-light gold-text leading-none">
+      <div className="bg-white rounded-2xl px-4 py-3 md:px-6 md:py-4 min-w-[70px] md:min-w-[90px] flex items-center justify-center shadow-sm"
+        style={{ border: "1px solid rgba(201,122,143,0.18)" }}>
+        <span className="font-display text-4xl md:text-6xl font-light leading-none rose-text">
           {String(value).padStart(2, "0")}
         </span>
-        <div className="absolute inset-0 pointer-events-none" style={{
-          background: "radial-gradient(ellipse at top, rgba(212,168,67,0.08) 0%, transparent 70%)"
-        }} />
       </div>
-      <span className="mt-2 text-xs md:text-sm font-body text-gold/60 uppercase tracking-widest">{label}</span>
+      <span className="mt-2 text-xs md:text-sm font-body uppercase tracking-widest" style={{ color: "#b09aa0" }}>{label}</span>
     </div>
   );
 }
@@ -57,21 +49,21 @@ function useInView(threshold = 0.15) {
     }, { threshold });
     obs.observe(el);
     return () => obs.disconnect();
-  }, []);
+  }, [threshold]);
   return { ref, inView };
 }
 
 const schedule = [
-  { time: "14:00", icon: "Heart", title: "Церемония бракосочетания", desc: "Торжественная роспись в Дворце бракосочетания" },
-  { time: "15:00", icon: "Camera", title: "Фотосессия", desc: "Прогулка и памятные фотографии молодожёнов" },
-  { time: "16:30", icon: "UtensilsCrossed", title: "Встреча гостей", desc: "Торжественный приём в банкетном зале" },
-  { time: "17:00", icon: "Music", title: "Праздничный банкет", desc: "Ужин, тосты и поздравления от близких" },
-  { time: "19:00", icon: "Sparkles", title: "Первый танец", desc: "Вальс молодожёнов и открытие танцпола" },
-  { time: "23:00", icon: "Star", title: "Торт и сюрпризы", desc: "Торжественный разрез свадебного торта" },
+  { time: "15:30", icon: "Users", title: "Сбор гостей", desc: "Встреча и размещение гостей" },
+  { time: "16:00", icon: "Heart", title: "Церемония бракосочетания", desc: "Выездная торжественная церемония" },
+  { time: "17:00", icon: "Wine", title: "Фуршет", desc: "Лёгкие закуски и напитки под открытым небом" },
+  { time: "18:00", icon: "UtensilsCrossed", title: "Начало банкета", desc: "Праздничный ужин, тосты и поздравления" },
+  { time: "22:00", icon: "Cake", title: "Свадебный торт", desc: "Торжественная подача и разрез торта" },
+  { time: "00:00", icon: "Star", title: "Завершение банкета", desc: "Финальный танец и прощание с гостями" },
 ];
 
 export default function Index() {
-  const { timeLeft } = useCountdown(WEDDING_DATE);
+  const timeLeft = useCountdown(WEDDING_DATE);
   const heroRef = useInView(0.1);
   const dateRef = useInView(0.2);
   const scheduleRef = useInView(0.1);
@@ -80,14 +72,33 @@ export default function Index() {
 
   const [form, setForm] = useState({ name: "", guests: "1", diet: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch(RSVP_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setError("Не удалось отправить. Попробуйте ещё раз.");
+      }
+    } catch {
+      setError("Ошибка сети. Проверьте подключение.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-midnight font-body overflow-x-hidden">
+    <div className="min-h-screen font-body overflow-x-hidden" style={{ background: "#fdf8f5" }}>
 
       {/* ─── HERO ─── */}
       <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
@@ -99,114 +110,102 @@ export default function Index() {
             backgroundPosition: "center",
           }}
         />
-        <div className="absolute inset-0 z-1" style={{
-          background: "linear-gradient(to bottom, rgba(10,10,20,0.55) 0%, rgba(10,10,20,0.3) 40%, rgba(10,10,20,0.75) 100%)"
+        <div className="absolute inset-0 z-0" style={{
+          background: "linear-gradient(to bottom, rgba(253,240,243,0.6) 0%, rgba(253,232,236,0.3) 40%, rgba(253,248,245,0.88) 100%)"
         }} />
 
-        {[...Array(12)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full pointer-events-none"
-            style={{
-              width: `${2 + (i % 3) + 2}px`,
-              height: `${2 + (i % 3) + 2}px`,
-              background: `rgba(212, 168, 67, ${0.2 + (i % 5) * 0.1})`,
-              left: `${(i * 8.3) % 100}%`,
-              top: `${(i * 7.7) % 100}%`,
-              animation: `float ${3 + (i % 4)}s ease-in-out ${(i % 3)}s infinite`,
-            }}
-          />
-        ))}
+        <div className="absolute top-20 left-10 w-64 h-64 rounded-full pointer-events-none z-0"
+          style={{ background: "radial-gradient(circle, rgba(242,196,206,0.35) 0%, transparent 70%)" }} />
+        <div className="absolute bottom-32 right-10 w-80 h-80 rounded-full pointer-events-none z-0"
+          style={{ background: "radial-gradient(circle, rgba(201,122,143,0.2) 0%, transparent 70%)" }} />
 
         <div ref={heroRef.ref} className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <div className={`transition-all duration-1000 ${heroRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body text-gold/70 uppercase tracking-[0.4em] text-sm mb-6">
-              С радостью приглашаем вас на
+            <p className="font-body uppercase tracking-[0.5em] text-xs mb-8" style={{ color: "#c97a8f" }}>
+              мы приглашаем вас
             </p>
           </div>
 
           <div className={`transition-all duration-1000 delay-200 ${heroRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <h1 className="font-display text-7xl md:text-9xl font-light leading-none mb-2 gold-shimmer">
+            <h1 className="font-display font-light leading-none mb-2 rose-shimmer" style={{ fontSize: "clamp(4rem, 12vw, 8rem)" }}>
               Игорь
             </h1>
-            <div className="flex items-center justify-center gap-6 my-4">
+            <div className="flex items-center justify-center gap-6 my-3">
               <div className="section-divider flex-1" />
-              <span className="font-display text-3xl md:text-4xl italic text-gold-light/80">&amp;</span>
+              <span className="font-display text-3xl italic" style={{ color: "#c97a8f" }}>&amp;</span>
               <div className="section-divider flex-1" />
             </div>
-            <h1 className="font-display text-7xl md:text-9xl font-light leading-none gold-shimmer">
+            <h1 className="font-display font-light leading-none rose-shimmer" style={{ fontSize: "clamp(4rem, 12vw, 8rem)" }}>
               Ксения
             </h1>
           </div>
 
           <div className={`transition-all duration-1000 delay-500 ${heroRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body text-foreground/60 mt-8 text-lg tracking-wide">
+            <p className="font-body mt-8 text-lg tracking-widest" style={{ color: "#9a7080" }}>
               30 августа 2026
             </p>
           </div>
 
-          <div className={`transition-all duration-1000 delay-700 mt-12 ${heroRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+          <div className={`transition-all duration-1000 delay-700 mt-10 ${heroRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
             <a
               href="#rsvp"
-              className="gold-btn inline-flex items-center gap-2 px-8 py-4 rounded-full font-body font-semibold text-sm uppercase tracking-widest"
+              className="rose-btn inline-flex items-center gap-2 px-8 py-4 rounded-full font-body text-sm uppercase tracking-widest"
             >
-              <Icon name="Heart" size={16} />
+              <Icon name="Heart" size={15} />
               Подтвердить присутствие
             </a>
           </div>
         </div>
 
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-          <Icon name="ChevronDown" size={24} className="text-gold/50" />
+          <Icon name="ChevronDown" size={22} style={{ color: "#c97a8f" } as React.CSSProperties} />
         </div>
       </section>
 
       {/* ─── COUNTDOWN ─── */}
-      <section className="py-20 px-6 relative">
-        <div className="absolute inset-0" style={{
-          background: "radial-gradient(ellipse at center, rgba(212,168,67,0.04) 0%, transparent 70%)"
-        }} />
-        <div className="max-w-3xl mx-auto text-center relative z-10">
-          <p className="font-body text-gold/60 uppercase tracking-[0.3em] text-xs mb-4">До торжества</p>
-          <h2 className="font-display text-4xl md:text-5xl font-light gold-text mb-12">Обратный отсчёт</h2>
+      <section className="py-20 px-6" style={{ background: "#fff" }}>
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#c97a8f" }}>До торжества</p>
+          <h2 className="font-display text-4xl md:text-5xl font-light mb-12 rose-text">Обратный отсчёт</h2>
           <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
             <CountdownUnit value={timeLeft.days} label="дней" />
-            <span className="font-display text-3xl text-gold/40 mb-6">:</span>
+            <span className="font-display text-3xl mb-6" style={{ color: "#e8c0c8" }}>:</span>
             <CountdownUnit value={timeLeft.hours} label="часов" />
-            <span className="font-display text-3xl text-gold/40 mb-6">:</span>
+            <span className="font-display text-3xl mb-6" style={{ color: "#e8c0c8" }}>:</span>
             <CountdownUnit value={timeLeft.minutes} label="минут" />
-            <span className="font-display text-3xl text-gold/40 mb-6">:</span>
+            <span className="font-display text-3xl mb-6" style={{ color: "#e8c0c8" }}>:</span>
             <CountdownUnit value={timeLeft.seconds} label="секунд" />
           </div>
         </div>
       </section>
 
       {/* ─── DATE & PLACE ─── */}
-      <section className="py-20 px-6" id="details">
+      <section className="py-20 px-6" id="details" style={{ background: "#fdf8f5" }}>
         <div ref={dateRef.ref} className="max-w-5xl mx-auto">
-          <div className={`text-center mb-14 transition-all duration-800 ${dateRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body text-gold/60 uppercase tracking-[0.3em] text-xs mb-4">Когда и где</p>
-            <h2 className="font-display text-4xl md:text-5xl font-light gold-text mb-3">Детали торжества</h2>
-            <div className="section-divider mt-6" />
+          <div className={`text-center mb-14 transition-all duration-700 ${dateRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#c97a8f" }}>Когда и где</p>
+            <h2 className="font-display text-4xl md:text-5xl font-light rose-text mb-3">Детали торжества</h2>
+            <div className="section-divider mt-5" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { icon: "CalendarDays", title: "Дата", lines: ["30 августа 2026", "Воскресенье"] },
-              { icon: "Clock", title: "Время", lines: ["Начало в 14:00", "Ждём вас заранее"] },
-              { icon: "MapPin", title: "Место", lines: ["Банкетный зал «Изумруд»", "ул. Садовая, 15"] },
+              { icon: "Clock", title: "Время", lines: ["Начало в 16:00", "Сбор гостей с 15:30"] },
+              { icon: "MapPin", title: "Место", lines: ["Загородный клуб «Weekend»", "г. Ростов-на-Дону, ул. Левобережная, 47"] },
             ].map((item, i) => (
               <div
                 key={i}
-                className={`glass-card p-8 text-center transition-all duration-700 hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(212,168,67,0.15)] ${dateRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                className={`glass-card p-8 text-center transition-all duration-700 hover:-translate-y-1 ${dateRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 style={{ transitionDelay: `${i * 150}ms` }}
               >
                 <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5"
-                  style={{ background: "linear-gradient(135deg, rgba(212,168,67,0.2), rgba(212,168,67,0.05))", border: "1px solid rgba(212,168,67,0.3)" }}>
-                  <Icon name={item.icon} size={24} className="text-gold" />
+                  style={{ background: "linear-gradient(135deg, #fde8ec, #fcd0d8)" }}>
+                  <Icon name={item.icon} size={22} style={{ color: "#c97a8f" } as React.CSSProperties} />
                 </div>
-                <h3 className="font-body text-gold/70 uppercase tracking-widest text-xs mb-3">{item.title}</h3>
+                <h3 className="font-body uppercase tracking-widest text-xs mb-3" style={{ color: "#c97a8f" }}>{item.title}</h3>
                 {item.lines.map((l, j) => (
-                  <p key={j} className={`font-display text-xl ${j === 0 ? "text-foreground" : "text-foreground/50 text-base"}`}>{l}</p>
+                  <p key={j} className={`font-display ${j === 0 ? "text-xl" : "text-sm mt-1"}`}
+                    style={{ color: j === 0 ? "#3a2530" : "#9a7080" }}>{l}</p>
                 ))}
               </div>
             ))}
@@ -215,39 +214,36 @@ export default function Index() {
       </section>
 
       {/* ─── SCHEDULE ─── */}
-      <section className="py-20 px-6 relative" id="schedule">
-        <div className="absolute inset-0" style={{
-          background: "linear-gradient(180deg, transparent, rgba(212,168,67,0.03) 50%, transparent)"
-        }} />
-        <div ref={scheduleRef.ref} className="max-w-2xl mx-auto relative z-10">
-          <div className={`text-center mb-14 transition-all duration-800 ${scheduleRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body text-gold/60 uppercase tracking-[0.3em] text-xs mb-4">Программа</p>
-            <h2 className="font-display text-4xl md:text-5xl font-light gold-text mb-3">Расписание дня</h2>
-            <div className="section-divider mt-6" />
+      <section className="py-20 px-6" id="schedule" style={{ background: "#fff" }}>
+        <div ref={scheduleRef.ref} className="max-w-2xl mx-auto">
+          <div className={`text-center mb-14 transition-all duration-700 ${scheduleRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#c97a8f" }}>Программа</p>
+            <h2 className="font-display text-4xl md:text-5xl font-light rose-text mb-3">Расписание дня</h2>
+            <div className="section-divider mt-5" />
           </div>
           <div className="relative">
-            <div className="absolute left-[2.25rem] top-0 bottom-0 w-px" style={{
-              background: "linear-gradient(to bottom, transparent, rgba(212,168,67,0.4) 10%, rgba(212,168,67,0.4) 90%, transparent)"
-            }} />
-            <div className="space-y-2">
+            <div className="absolute left-[2.25rem] top-0 bottom-0 w-px"
+              style={{ background: "linear-gradient(to bottom, transparent, rgba(201,122,143,0.3) 10%, rgba(201,122,143,0.3) 90%, transparent)" }} />
+            <div className="space-y-3">
               {schedule.map((item, i) => (
                 <div
                   key={i}
                   className={`flex gap-5 group transition-all duration-700 ${scheduleRef.inView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"}`}
-                  style={{ transitionDelay: `${i * 100}ms` }}
+                  style={{ transitionDelay: `${i * 90}ms` }}
                 >
-                  <div className="flex-shrink-0 flex flex-col items-center">
-                    <div className="w-[4.5rem] h-[4.5rem] rounded-full glass-card flex items-center justify-center z-10 transition-all">
-                      <Icon name={item.icon} size={20} className="text-gold" />
+                  <div className="flex-shrink-0">
+                    <div className="w-[4.5rem] h-[4.5rem] rounded-full flex items-center justify-center z-10 transition-all"
+                      style={{ background: "linear-gradient(135deg, #fde8ec, #fcd0d8)", border: "1px solid rgba(201,122,143,0.2)" }}>
+                      <Icon name={item.icon} size={20} style={{ color: "#c97a8f" } as React.CSSProperties} />
                     </div>
                   </div>
-                  <div className="glass-card flex-1 p-5 mb-2 group-hover:-translate-y-0.5 transition-all duration-300">
-                    <div className="flex items-center gap-3 mb-1">
-                      <span className="font-body text-gold font-semibold text-sm">{item.time}</span>
-                      <span className="w-4 h-px bg-gold/30" />
-                      <h3 className="font-display text-lg text-foreground">{item.title}</h3>
+                  <div className="glass-card flex-1 p-5 mb-1 group-hover:-translate-y-0.5 transition-all duration-300">
+                    <div className="flex flex-wrap items-center gap-2 mb-1">
+                      <span className="font-body font-semibold text-sm" style={{ color: "#c97a8f" }}>{item.time}</span>
+                      <span className="w-3 h-px inline-block" style={{ background: "rgba(201,122,143,0.4)" }} />
+                      <h3 className="font-display text-lg" style={{ color: "#3a2530" }}>{item.title}</h3>
                     </div>
-                    <p className="font-body text-foreground/50 text-sm">{item.desc}</p>
+                    <p className="font-body text-sm" style={{ color: "#9a7080" }}>{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -257,23 +253,23 @@ export default function Index() {
       </section>
 
       {/* ─── RSVP ─── */}
-      <section className="py-20 px-6" id="rsvp">
+      <section className="py-20 px-6" id="rsvp" style={{ background: "#fdf8f5" }}>
         <div ref={rsvpRef.ref} className="max-w-xl mx-auto">
-          <div className={`text-center mb-12 transition-all duration-800 ${rsvpRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body text-gold/60 uppercase tracking-[0.3em] text-xs mb-4">Ответ гостя</p>
-            <h2 className="font-display text-4xl md:text-5xl font-light gold-text mb-3">Подтверждение</h2>
-            <div className="section-divider mt-6" />
-            <p className="text-foreground/50 text-sm mt-6 font-body">Просим подтвердить присутствие до 1 августа 2026</p>
+          <div className={`text-center mb-12 transition-all duration-700 ${rsvpRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#c97a8f" }}>Ответ гостя</p>
+            <h2 className="font-display text-4xl md:text-5xl font-light rose-text mb-3">Подтверждение</h2>
+            <div className="section-divider mt-5" />
+            <p className="text-sm mt-5 font-body" style={{ color: "#b09aa0" }}>Просим подтвердить присутствие до 1 августа 2026</p>
           </div>
 
           {submitted ? (
             <div className="glass-card p-12 text-center">
               <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
-                style={{ background: "linear-gradient(135deg, rgba(212,168,67,0.3), rgba(212,168,67,0.1))", border: "1px solid rgba(212,168,67,0.4)" }}>
-                <Icon name="Heart" size={32} className="text-gold" />
+                style={{ background: "linear-gradient(135deg, #fde8ec, #fcd0d8)" }}>
+                <Icon name="Heart" size={32} style={{ color: "#c97a8f" } as React.CSSProperties} />
               </div>
-              <h3 className="font-display text-3xl gold-text mb-3">Спасибо!</h3>
-              <p className="font-body text-foreground/60">Мы рады, что вы будете с нами в этот особенный день</p>
+              <h3 className="font-display text-3xl rose-text mb-3">Спасибо!</h3>
+              <p className="font-body" style={{ color: "#9a7080" }}>Мы рады, что вы будете с нами в этот особенный день</p>
             </div>
           ) : (
             <form
@@ -281,22 +277,23 @@ export default function Index() {
               className={`glass-card p-8 space-y-5 transition-all duration-700 ${rsvpRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
             >
               <div>
-                <label className="block font-body text-foreground/60 text-xs uppercase tracking-widest mb-2">Ваше имя *</label>
+                <label className="block font-body text-xs uppercase tracking-widest mb-2" style={{ color: "#b09aa0" }}>Ваше имя *</label>
                 <input
                   required
                   value={form.name}
                   onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                   placeholder="Иван Иванов"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 font-body text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all"
+                  className="w-full rounded-xl px-4 py-3 font-body focus:outline-none transition-all"
+                  style={{ background: "#fdf0f3", border: "1px solid rgba(201,122,143,0.25)", color: "#3a2530" }}
                 />
               </div>
               <div>
-                <label className="block font-body text-foreground/60 text-xs uppercase tracking-widest mb-2">Количество гостей</label>
+                <label className="block font-body text-xs uppercase tracking-widest mb-2" style={{ color: "#b09aa0" }}>Количество гостей</label>
                 <select
                   value={form.guests}
                   onChange={e => setForm(f => ({ ...f, guests: e.target.value }))}
-                  className="w-full border border-white/10 rounded-xl px-4 py-3 font-body text-foreground focus:outline-none focus:border-gold/50 transition-all"
-                  style={{ background: "rgba(26,26,46,0.95)" }}
+                  className="w-full rounded-xl px-4 py-3 font-body focus:outline-none transition-all"
+                  style={{ background: "#fdf0f3", border: "1px solid rgba(201,122,143,0.25)", color: "#3a2530" }}
                 >
                   {["1", "2", "3", "4"].map(n => (
                     <option key={n} value={n}>{n} {n === "1" ? "гость" : "гостя"}</option>
@@ -304,27 +301,36 @@ export default function Index() {
                 </select>
               </div>
               <div>
-                <label className="block font-body text-foreground/60 text-xs uppercase tracking-widest mb-2">Пожелания по меню</label>
+                <label className="block font-body text-xs uppercase tracking-widest mb-2" style={{ color: "#b09aa0" }}>Пожелания по меню</label>
                 <input
                   value={form.diet}
                   onChange={e => setForm(f => ({ ...f, diet: e.target.value }))}
                   placeholder="Вегетарианское, аллергия..."
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 font-body text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all"
+                  className="w-full rounded-xl px-4 py-3 font-body focus:outline-none transition-all"
+                  style={{ background: "#fdf0f3", border: "1px solid rgba(201,122,143,0.25)", color: "#3a2530" }}
                 />
               </div>
               <div>
-                <label className="block font-body text-foreground/60 text-xs uppercase tracking-widest mb-2">Пожелания молодожёнам</label>
+                <label className="block font-body text-xs uppercase tracking-widest mb-2" style={{ color: "#b09aa0" }}>Пожелания молодожёнам</label>
                 <textarea
                   rows={3}
                   value={form.message}
                   onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                   placeholder="Ваши тёплые слова..."
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 font-body text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/30 transition-all resize-none"
+                  className="w-full rounded-xl px-4 py-3 font-body focus:outline-none transition-all resize-none"
+                  style={{ background: "#fdf0f3", border: "1px solid rgba(201,122,143,0.25)", color: "#3a2530" }}
                 />
               </div>
-              <button type="submit" className="gold-btn w-full py-4 rounded-xl font-body font-semibold uppercase tracking-widest text-sm flex items-center justify-center gap-2">
-                <Icon name="Send" size={16} />
-                Подтвердить присутствие
+              {error && (
+                <p className="text-sm text-center" style={{ color: "#c97a8f" }}>{error}</p>
+              )}
+              <button
+                type="submit"
+                disabled={loading}
+                className="rose-btn w-full py-4 rounded-xl font-body text-sm uppercase tracking-widest flex items-center justify-center gap-2 disabled:opacity-60"
+              >
+                <Icon name={loading ? "Loader2" : "Send"} size={16} className={loading ? "animate-spin" : ""} />
+                {loading ? "Отправляем..." : "Подтвердить присутствие"}
               </button>
             </form>
           )}
@@ -332,40 +338,43 @@ export default function Index() {
       </section>
 
       {/* ─── CONTACTS ─── */}
-      <section className="py-20 px-6" id="contacts">
+      <section className="py-20 px-6" id="contacts" style={{ background: "#fff" }}>
         <div ref={contactRef.ref} className="max-w-3xl mx-auto">
-          <div className={`text-center mb-12 transition-all duration-800 ${contactRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body text-gold/60 uppercase tracking-[0.3em] text-xs mb-4">Связь</p>
-            <h2 className="font-display text-4xl md:text-5xl font-light gold-text mb-3">Контакты</h2>
-            <div className="section-divider mt-6" />
+          <div className={`text-center mb-12 transition-all duration-700 ${contactRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#c97a8f" }}>Связь</p>
+            <h2 className="font-display text-4xl md:text-5xl font-light rose-text mb-3">Контакты</h2>
+            <div className="section-divider mt-5" />
           </div>
-          <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 transition-all duration-700 delay-200 ${contactRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+          <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 max-w-xl mx-auto transition-all duration-700 delay-200 ${contactRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
             {[
-              { icon: "Phone", label: "Телефон жениха", value: "+7 (999) 123-45-67", name: "Игорь" },
-              { icon: "Phone", label: "Телефон невесты", value: "+7 (999) 765-43-21", name: "Ксения" },
-              { icon: "MessageCircle", label: "WhatsApp / Telegram", value: "@wedding_igor_ksenia", name: "Организаторы" },
-              { icon: "Mail", label: "Электронная почта", value: "wedding@example.com", name: "По всем вопросам" },
+              { label: "Телефон жениха", value: "+7 (904) 759-96-05", name: "Игорь" },
+              { label: "Телефон невесты", value: "+7 (928) 624-77-38", name: "Ксения" },
             ].map((c, i) => (
-              <div key={i} className="glass-card p-6 flex items-center gap-5 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(212,168,67,0.12)] transition-all duration-300">
+              <a
+                key={i}
+                href={`tel:${c.value.replace(/\D/g, "")}`}
+                className="glass-card p-6 flex items-center gap-5 hover:-translate-y-1 transition-all duration-300 no-underline"
+                style={{ textDecoration: "none" }}
+              >
                 <div className="w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center"
-                  style={{ background: "linear-gradient(135deg, rgba(212,168,67,0.2), rgba(212,168,67,0.05))", border: "1px solid rgba(212,168,67,0.3)" }}>
-                  <Icon name={c.icon} size={20} className="text-gold" />
+                  style={{ background: "linear-gradient(135deg, #fde8ec, #fcd0d8)" }}>
+                  <Icon name="Phone" size={20} style={{ color: "#c97a8f" } as React.CSSProperties} />
                 </div>
                 <div>
-                  <p className="font-body text-foreground/40 text-xs uppercase tracking-wider mb-0.5">{c.label}</p>
-                  <p className="font-body text-foreground font-medium">{c.value}</p>
-                  <p className="font-body text-gold/60 text-xs">{c.name}</p>
+                  <p className="font-body text-xs uppercase tracking-wider mb-0.5" style={{ color: "#b09aa0" }}>{c.label}</p>
+                  <p className="font-body font-medium" style={{ color: "#3a2530" }}>{c.value}</p>
+                  <p className="font-body text-xs" style={{ color: "#c97a8f" }}>{c.name}</p>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>
       </section>
 
       {/* ─── FOOTER ─── */}
-      <footer className="py-12 px-6 text-center border-t border-white/5">
-        <p className="font-display text-2xl gold-text mb-2">Игорь & Ксения</p>
-        <p className="font-body text-foreground/30 text-sm">30 августа 2026 · С любовью ❤️</p>
+      <footer className="py-12 px-6 text-center" style={{ borderTop: "1px solid rgba(201,122,143,0.15)" }}>
+        <p className="font-display text-2xl rose-text mb-2">Игорь & Ксения</p>
+        <p className="font-body text-sm" style={{ color: "#c9a0ae" }}>30 августа 2026 · с любовью ♡</p>
       </footer>
     </div>
   );
