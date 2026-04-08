@@ -68,6 +68,8 @@ export default function Index() {
   const heroRef = useInView(0.1);
   const dateRef = useInView(0.2);
   const scheduleRef = useInView(0.1);
+  const dressRef = useInView(0.2);
+  const mapRef = useInView(0.2);
   const rsvpRef = useInView(0.2);
   const contactRef = useInView(0.2);
 
@@ -243,6 +245,105 @@ export default function Index() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── DRESS CODE ─── */}
+      <section className="py-20 px-6" id="dresscode" style={{ background: "#fdf8f5" }}>
+        <div ref={dressRef.ref} className="max-w-4xl mx-auto">
+          <div className={`text-center mb-14 transition-all duration-700 ${dressRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#c97a8f" }}>Образ</p>
+            <h2 className="font-display text-4xl md:text-5xl font-light rose-text mb-3">Дресс-код</h2>
+            <div className="section-divider mt-5" />
+            <p className="font-body text-sm mt-5 max-w-lg mx-auto" style={{ color: "#9a7080" }}>
+              Мы будем рады, если ваш образ будет гармонировать с палитрой нашего торжества
+            </p>
+          </div>
+          <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 transition-all duration-700 delay-100 ${dressRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            {[
+              { icon: "Shirt", title: "Для мужчин", lines: ["Костюм или смокинг", "Цвета: бежевый, серый, тёмно-синий"] },
+              { icon: "Sparkles", title: "Для женщин", lines: ["Вечернее или коктейльное платье", "Цвета: пудровый, персиковый, бежевый, ivory"] },
+              { icon: "Ban", title: "Просим избегать", lines: ["Белый и кремовый цвет", "Повседневная одежда"] },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className={`glass-card p-7 text-center transition-all duration-700 hover:-translate-y-1 ${dressRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                style={{ transitionDelay: `${i * 150}ms` }}
+              >
+                <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5"
+                  style={{ background: "linear-gradient(135deg, #fde8ec, #fcd0d8)" }}>
+                  <Icon name={item.icon} size={22} style={{ color: "#c97a8f" } as CSSProperties} />
+                </div>
+                <h3 className="font-body uppercase tracking-widest text-xs mb-3" style={{ color: "#c97a8f" }}>{item.title}</h3>
+                {item.lines.map((l, j) => (
+                  <p key={j} className="font-body text-sm mt-1" style={{ color: j === 0 ? "#3a2530" : "#9a7080" }}>{l}</p>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className={`flex flex-wrap justify-center gap-3 transition-all duration-700 delay-300 ${dressRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            {[
+              { label: "Пудровый", hex: "#f0c8d0" },
+              { label: "Персиковый", hex: "#f5c9a8" },
+              { label: "Бежевый", hex: "#e8d5c0" },
+              { label: "Ivory", hex: "#f5f0e8" },
+              { label: "Серый", hex: "#c8c8d0" },
+              { label: "Тёмно-синий", hex: "#2c3e6e" },
+            ].map((c) => (
+              <div key={c.label} className="flex flex-col items-center gap-2">
+                <div className="w-10 h-10 rounded-full shadow-sm border"
+                  style={{ background: c.hex, borderColor: "rgba(201,122,143,0.2)" }} />
+                <span className="font-body text-xs" style={{ color: "#9a7080" }}>{c.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── MAP ─── */}
+      <section className="py-20 px-6" id="map" style={{ background: "#fff" }}>
+        <div ref={mapRef.ref} className="max-w-4xl mx-auto">
+          <div className={`text-center mb-12 transition-all duration-700 ${mapRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#c97a8f" }}>Как добраться</p>
+            <h2 className="font-display text-4xl md:text-5xl font-light rose-text mb-3">Место проведения</h2>
+            <div className="section-divider mt-5" />
+            <p className="font-body text-sm mt-4" style={{ color: "#9a7080" }}>
+              Загородный клуб «Weekend» · г. Ростов-на-Дону, ул. Левобережная, 47
+            </p>
+          </div>
+          <div className={`transition-all duration-700 delay-200 ${mapRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            <div className="rounded-2xl overflow-hidden shadow-md" style={{ border: "1px solid rgba(201,122,143,0.18)" }}>
+              <iframe
+                title="Карта — Загородный клуб Weekend"
+                src="https://yandex.ru/map-widget/v1/?text=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2-%D0%BD%D0%B0-%D0%94%D0%BE%D0%BD%D1%83%2C+%D1%83%D0%BB.+%D0%9B%D0%B5%D0%B2%D0%BE%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F%2C+47&z=15&l=map"
+                width="100%"
+                height="420"
+                style={{ display: "block", border: "none" }}
+                allowFullScreen
+              />
+            </div>
+            <div className="mt-6 flex flex-wrap justify-center gap-4">
+              <a
+                href="https://yandex.ru/maps/?text=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2-%D0%BD%D0%B0-%D0%94%D0%BE%D0%BD%D1%83%2C+%D1%83%D0%BB.+%D0%9B%D0%B5%D0%B2%D0%BE%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F%2C+47"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rose-btn inline-flex items-center gap-2 px-6 py-3 rounded-full font-body text-sm uppercase tracking-widest"
+              >
+                <Icon name="MapPin" size={15} />
+                Открыть в Яндекс Картах
+              </a>
+              <a
+                href="https://maps.google.com/?q=Ростов-на-Дону,+ул.+Левобережная,+47"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-body text-sm uppercase tracking-widest transition-all hover:-translate-y-0.5"
+                style={{ background: "#fde8ec", color: "#c97a8f", border: "1px solid rgba(201,122,143,0.25)" }}
+              >
+                <Icon name="Globe" size={15} />
+                Открыть в Google Maps
+              </a>
             </div>
           </div>
         </div>
