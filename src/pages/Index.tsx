@@ -288,9 +288,11 @@ export default function Index() {
               { label: "Пудровый", hex: "#f0c8d0" },
               { label: "Персиковый", hex: "#f5c9a8" },
               { label: "Бежевый", hex: "#e8d5c0" },
-              { label: "Ivory", hex: "#f5f0e8" },
+              { label: "Оливковый", hex: "#7a7a4a" },
               { label: "Серый", hex: "#c8c8d0" },
-              { label: "Тёмно-синий", hex: "#2c3e6e" },
+              { label: "Бордо", hex: "#6e1e2c" },
+              { label: "Тёмно-зелёный", hex: "#1e4a30" },
+              { label: "Коричневый", hex: "#4a2e1a" },
             ].map((c) => (
               <div key={c.label} className="flex flex-col items-center gap-2">
                 <div className="w-10 h-10 rounded-full shadow-sm border"
