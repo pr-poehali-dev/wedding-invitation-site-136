@@ -105,19 +105,14 @@ export default function Index() {
         <div
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: `url(https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/24e5a6df-0786-4a62-9aa8-4a2cc1ccf957.jpg)`,
+            backgroundImage: `url(https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/307177ef-279e-473b-95e6-473d88ae6e3f.jpg)`,
             backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundPosition: "center top",
           }}
         />
         <div className="absolute inset-0 z-0" style={{
-          background: "linear-gradient(to bottom, rgba(253,240,243,0.6) 0%, rgba(253,232,236,0.3) 40%, rgba(253,248,245,0.88) 100%)"
+          background: "linear-gradient(to bottom, rgba(253,248,245,0.15) 0%, rgba(253,244,240,0.1) 40%, rgba(253,248,245,0.92) 100%)"
         }} />
-
-        <div className="absolute top-20 left-10 w-64 h-64 rounded-full pointer-events-none z-0"
-          style={{ background: "radial-gradient(circle, rgba(242,196,206,0.35) 0%, transparent 70%)" }} />
-        <div className="absolute bottom-32 right-10 w-80 h-80 rounded-full pointer-events-none z-0"
-          style={{ background: "radial-gradient(circle, rgba(201,122,143,0.2) 0%, transparent 70%)" }} />
 
         <div ref={heroRef.ref} className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <div className={`transition-all duration-1000 ${heroRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
