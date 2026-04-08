@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import type { CSSProperties } from "react";
 import Icon from "@/components/ui/icon";
 
 const WEDDING_DATE = new Date("2026-08-30T16:00:00");
@@ -153,7 +154,7 @@ export default function Index() {
         </div>
 
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-          <Icon name="ChevronDown" size={22} style={{ color: "#c97a8f" } as React.CSSProperties} />
+          <Icon name="ChevronDown" size={22} style={{ color: "#c97a8f" } as CSSProperties} />
         </div>
       </section>
 
@@ -195,7 +196,7 @@ export default function Index() {
               >
                 <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5"
                   style={{ background: "linear-gradient(135deg, #fde8ec, #fcd0d8)" }}>
-                  <Icon name={item.icon} size={22} style={{ color: "#c97a8f" } as React.CSSProperties} />
+                  <Icon name={item.icon} size={22} style={{ color: "#c97a8f" } as CSSProperties} />
                 </div>
                 <h3 className="font-body uppercase tracking-widest text-xs mb-3" style={{ color: "#c97a8f" }}>{item.title}</h3>
                 {item.lines.map((l, j) => (
@@ -229,7 +230,7 @@ export default function Index() {
                   <div className="flex-shrink-0">
                     <div className="w-[4.5rem] h-[4.5rem] rounded-full flex items-center justify-center z-10 transition-all"
                       style={{ background: "linear-gradient(135deg, #fde8ec, #fcd0d8)", border: "1px solid rgba(201,122,143,0.2)" }}>
-                      <Icon name={item.icon} size={20} style={{ color: "#c97a8f" } as React.CSSProperties} />
+                      <Icon name={item.icon} size={20} style={{ color: "#c97a8f" } as CSSProperties} />
                     </div>
                   </div>
                   <div className="glass-card flex-1 p-5 mb-1 group-hover:-translate-y-0.5 transition-all duration-300">
@@ -261,7 +262,7 @@ export default function Index() {
             <div className="glass-card p-12 text-center">
               <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
                 style={{ background: "linear-gradient(135deg, #fde8ec, #fcd0d8)" }}>
-                <Icon name="Heart" size={32} style={{ color: "#c97a8f" } as React.CSSProperties} />
+                <Icon name="Heart" size={32} style={{ color: "#c97a8f" } as CSSProperties} />
               </div>
               <h3 className="font-display text-3xl rose-text mb-3">Спасибо!</h3>
               <p className="font-body" style={{ color: "#9a7080" }}>Мы рады, что вы будете с нами в этот особенный день</p>
@@ -353,7 +354,7 @@ export default function Index() {
               >
                 <div className="w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center"
                   style={{ background: "linear-gradient(135deg, #fde8ec, #fcd0d8)" }}>
-                  <Icon name="Phone" size={20} style={{ color: "#c97a8f" } as React.CSSProperties} />
+                  <Icon name="Phone" size={20} style={{ color: "#c97a8f" } as CSSProperties} />
                 </div>
                 <div>
                   <p className="font-body text-xs uppercase tracking-wider mb-0.5" style={{ color: "#b09aa0" }}>{c.label}</p>
