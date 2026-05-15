@@ -19,8 +19,8 @@ export default {
 			}
 		},
 		fontFamily: {
-				display: ['Cormorant Garamond', 'serif'],
-				body: ['Golos Text', 'sans-serif'],
+				display: ['Playfair Display', 'serif'],
+				body: ['Raleway', 'sans-serif'],
 			},
 			extend: {
 			colors: {

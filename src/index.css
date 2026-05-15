@@ -4,44 +4,44 @@
 
 @layer base {
   :root {
-    --background: 0 0% 99%;
-    --foreground: 340 15% 20%;
+    --background: 210 40% 97%;
+    --foreground: 215 30% 18%;
 
     --card: 0 0% 100%;
-    --card-foreground: 340 15% 20%;
+    --card-foreground: 215 30% 18%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 340 15% 20%;
+    --popover-foreground: 215 30% 18%;
 
-    --primary: 340 40% 65%;
+    --primary: 205 55% 55%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 340 30% 96%;
-    --secondary-foreground: 340 15% 30%;
+    --secondary: 205 40% 94%;
+    --secondary-foreground: 215 30% 25%;
 
-    --muted: 340 20% 96%;
-    --muted-foreground: 340 10% 55%;
+    --muted: 205 30% 94%;
+    --muted-foreground: 215 20% 52%;
 
-    --accent: 340 30% 94%;
-    --accent-foreground: 340 15% 25%;
+    --accent: 205 35% 91%;
+    --accent-foreground: 215 30% 22%;
 
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 340 20% 88%;
-    --input: 340 20% 92%;
-    --ring: 340 40% 65%;
+    --border: 205 30% 85%;
+    --input: 205 30% 90%;
+    --ring: 205 55% 55%;
 
     --radius: 1rem;
 
-    --sidebar-background: 0 0% 99%;
-    --sidebar-foreground: 340 15% 20%;
-    --sidebar-primary: 340 40% 65%;
+    --sidebar-background: 210 40% 97%;
+    --sidebar-foreground: 215 30% 18%;
+    --sidebar-primary: 205 55% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 340 30% 96%;
-    --sidebar-accent-foreground: 340 15% 30%;
-    --sidebar-border: 340 20% 88%;
-    --sidebar-ring: 340 40% 65%;
+    --sidebar-accent: 205 40% 94%;
+    --sidebar-accent-foreground: 215 30% 25%;
+    --sidebar-border: 205 30% 85%;
+    --sidebar-ring: 205 55% 55%;
   }
 }
 
@@ -52,8 +52,8 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: "Golos Text", sans-serif;
-    background-color: #fdf8f5;
+    font-family: "Raleway", sans-serif;
+    background-color: #f0f6fa;
   }
 
   html {
@@ -63,16 +63,16 @@
 
 @layer components {
   .glass-card {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(201, 122, 143, 0.18);
+    border: 1px solid rgba(100, 170, 210, 0.22);
     border-radius: 1.5rem;
-    box-shadow: 0 4px 24px rgba(180, 100, 120, 0.07);
+    box-shadow: 0 4px 24px rgba(70, 140, 190, 0.08);
   }
 
   .rose-text {
-    background: linear-gradient(135deg, #c97a8f 0%, #e8a0b0 50%, #c97a8f 100%);
+    background: linear-gradient(135deg, #4a90b8 0%, #7ab8d8 50%, #4a90b8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -81,10 +81,10 @@
   .rose-shimmer {
     background: linear-gradient(
       90deg,
-      #c97a8f 0%,
-      #f2c4ce 30%,
-      #c97a8f 60%,
-      #e8a0b0 100%
+      #4a90b8 0%,
+      #a8d4ea 30%,
+      #4a90b8 60%,
+      #7ab8d8 100%
     );
     background-size: 200% auto;
     -webkit-background-clip: text;
@@ -94,24 +94,24 @@
   }
 
   .rose-btn {
-    background: linear-gradient(135deg, #c97a8f, #e8a0b0);
+    background: linear-gradient(135deg, #4a90b8, #7ab8d8);
     color: #fff;
     font-weight: 600;
     transition: all 0.3s ease;
     border: none;
-    box-shadow: 0 4px 20px rgba(201, 122, 143, 0.35);
+    box-shadow: 0 4px 20px rgba(74, 144, 184, 0.35);
   }
 
   .rose-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(201, 122, 143, 0.5);
-    background: linear-gradient(135deg, #b56a7f, #da8fa0);
+    box-shadow: 0 8px 30px rgba(74, 144, 184, 0.5);
+    background: linear-gradient(135deg, #3a7fa8, #6aacc8);
   }
 
   .section-divider {
     width: 60px;
     height: 1.5px;
-    background: linear-gradient(90deg, transparent, #c97a8f, transparent);
+    background: linear-gradient(90deg, transparent, #7ab8d8, transparent);
     margin: 0 auto;
   }
 }
@@ -139,9 +139,9 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #fdf8f5;
+  background: #edf4f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #e8a0b0;
+  background: #7ab8d8;
   border-radius: 3px;
 }

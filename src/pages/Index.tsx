@@ -29,12 +29,12 @@ function CountdownUnit({ value, label }: { value: number; label: string }) {
   return (
     <div className="flex flex-col items-center">
       <div className="bg-white rounded-2xl px-4 py-3 md:px-6 md:py-4 min-w-[70px] md:min-w-[90px] flex items-center justify-center shadow-sm"
-        style={{ border: "1px solid rgba(201,122,143,0.18)" }}>
+        style={{ border: "1px solid rgba(74,144,184,0.18)" }}>
         <span className="font-display text-4xl md:text-6xl font-light leading-none rose-text">
           {String(value).padStart(2, "0")}
         </span>
       </div>
-      <span className="mt-2 text-xs md:text-sm font-body uppercase tracking-widest" style={{ color: "#b09aa0" }}>{label}</span>
+      <span className="mt-2 text-xs md:text-sm font-body uppercase tracking-widest" style={{ color: "#7aaabb" }}>{label}</span>
     </div>
   );
 }
@@ -101,7 +101,10 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen font-body overflow-x-hidden" style={{ background: "#fdf8f5" }}>
+    <div className="min-h-screen font-body overflow-x-hidden" style={{
+      background: "#edf5fa",
+      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 2 L58 30 L30 58 L2 30 Z' fill='none' stroke='%234a90b8' stroke-width='0.5' stroke-opacity='0.12'/%3E%3Ccircle cx='30' cy='30' r='2.5' fill='%234a90b8' fill-opacity='0.07'/%3E%3C/svg%3E")`,
+    }}>
 
       {/* ─── HERO ─── */}
       <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
@@ -114,12 +117,12 @@ export default function Index() {
           }}
         />
         <div className="absolute inset-0 z-0" style={{
-          background: "linear-gradient(to bottom, rgba(253,248,245,0.15) 0%, rgba(253,244,240,0.1) 40%, rgba(253,248,245,0.92) 100%)"
+          background: "linear-gradient(to bottom, rgba(237,245,250,0.15) 0%, rgba(210,235,248,0.1) 40%, rgba(237,245,250,0.92) 100%)"
         }} />
 
         <div ref={heroRef.ref} className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <div className={`transition-all duration-1000 ${heroRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body uppercase tracking-[0.5em] text-xs mb-8" style={{ color: "#c97a8f" }}>
+            <p className="font-body uppercase tracking-[0.5em] text-xs mb-8" style={{ color: "#4a90b8" }}>
               мы приглашаем вас
             </p>
           </div>
@@ -130,7 +133,7 @@ export default function Index() {
             </h1>
             <div className="flex items-center justify-center gap-6 my-3">
               <div className="section-divider flex-1" />
-              <span className="font-display text-3xl italic" style={{ color: "#c97a8f" }}>&amp;</span>
+              <span className="font-display text-3xl italic" style={{ color: "#4a90b8" }}>&amp;</span>
               <div className="section-divider flex-1" />
             </div>
             <h1 className="font-display font-light leading-none rose-shimmer" style={{ fontSize: "clamp(4rem, 12vw, 8rem)" }}>
@@ -139,7 +142,7 @@ export default function Index() {
           </div>
 
           <div className={`transition-all duration-1000 delay-500 ${heroRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body mt-8 text-lg tracking-widest" style={{ color: "#9a7080" }}>
+            <p className="font-body mt-8 text-lg tracking-widest" style={{ color: "#5a8fa8" }}>
               30 августа 2026
             </p>
           </div>
@@ -156,32 +159,32 @@ export default function Index() {
         </div>
 
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-          <Icon name="ChevronDown" size={22} style={{ color: "#c97a8f" } as CSSProperties} />
+          <Icon name="ChevronDown" size={22} style={{ color: "#4a90b8" } as CSSProperties} />
         </div>
       </section>
 
       {/* ─── COUNTDOWN ─── */}
-      <section className="py-20 px-6" style={{ background: "#fff" }}>
+      <section className="py-20 px-6" style={{ background: "rgba(255,255,255,0.65)" }}>
         <div className="max-w-3xl mx-auto text-center">
-          <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#c97a8f" }}>До торжества</p>
+          <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#4a90b8" }}>До торжества</p>
           <h2 className="font-display text-4xl md:text-5xl font-light mb-12 rose-text">Обратный отсчёт</h2>
           <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
             <CountdownUnit value={timeLeft.days} label="дней" />
-            <span className="font-display text-3xl mb-6" style={{ color: "#e8c0c8" }}>:</span>
+            <span className="font-display text-3xl mb-6" style={{ color: "#a8d4e8" }}>:</span>
             <CountdownUnit value={timeLeft.hours} label="часов" />
-            <span className="font-display text-3xl mb-6" style={{ color: "#e8c0c8" }}>:</span>
+            <span className="font-display text-3xl mb-6" style={{ color: "#a8d4e8" }}>:</span>
             <CountdownUnit value={timeLeft.minutes} label="минут" />
-            <span className="font-display text-3xl mb-6" style={{ color: "#e8c0c8" }}>:</span>
+            <span className="font-display text-3xl mb-6" style={{ color: "#a8d4e8" }}>:</span>
             <CountdownUnit value={timeLeft.seconds} label="секунд" />
           </div>
         </div>
       </section>
 
       {/* ─── DATE & PLACE ─── */}
-      <section className="py-20 px-6" id="details" style={{ background: "#fdf8f5" }}>
+      <section className="py-20 px-6" id="details" style={{ background: "#edf5fa" }}>
         <div ref={dateRef.ref} className="max-w-5xl mx-auto">
           <div className={`text-center mb-14 transition-all duration-700 ${dateRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#c97a8f" }}>Когда и где</p>
+            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#4a90b8" }}>Когда и где</p>
             <h2 className="font-display text-4xl md:text-5xl font-light rose-text mb-3">Детали торжества</h2>
             <div className="section-divider mt-5" />
           </div>
@@ -197,13 +200,13 @@ export default function Index() {
                 style={{ transitionDelay: `${i * 150}ms` }}
               >
                 <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5"
-                  style={{ background: "linear-gradient(135deg, #fde8ec, #fcd0d8)" }}>
-                  <Icon name={item.icon} size={22} style={{ color: "#c97a8f" } as CSSProperties} />
+                  style={{ background: "linear-gradient(135deg, #dceef8, #bcdaee)" }}>
+                  <Icon name={item.icon} size={22} style={{ color: "#4a90b8" } as CSSProperties} />
                 </div>
-                <h3 className="font-body uppercase tracking-widest text-xs mb-3" style={{ color: "#c97a8f" }}>{item.title}</h3>
+                <h3 className="font-body uppercase tracking-widest text-xs mb-3" style={{ color: "#4a90b8" }}>{item.title}</h3>
                 {item.lines.map((l, j) => (
                   <p key={j} className={`font-display ${j === 0 ? "text-xl" : "text-sm mt-1"}`}
-                    style={{ color: j === 0 ? "#3a2530" : "#9a7080" }}>{l}</p>
+                    style={{ color: j === 0 ? "#1a3a50" : "#5a8fa8" }}>{l}</p>
                 ))}
               </div>
             ))}
@@ -212,16 +215,16 @@ export default function Index() {
       </section>
 
       {/* ─── SCHEDULE ─── */}
-      <section className="py-20 px-6" id="schedule" style={{ background: "#fff" }}>
+      <section className="py-20 px-6" id="schedule" style={{ background: "rgba(255,255,255,0.65)" }}>
         <div ref={scheduleRef.ref} className="max-w-2xl mx-auto">
           <div className={`text-center mb-14 transition-all duration-700 ${scheduleRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#c97a8f" }}>Программа</p>
+            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#4a90b8" }}>Программа</p>
             <h2 className="font-display text-4xl md:text-5xl font-light rose-text mb-3">Расписание дня</h2>
             <div className="section-divider mt-5" />
           </div>
           <div className="relative">
             <div className="absolute left-[2.25rem] top-0 bottom-0 w-px"
-              style={{ background: "linear-gradient(to bottom, transparent, rgba(201,122,143,0.3) 10%, rgba(201,122,143,0.3) 90%, transparent)" }} />
+              style={{ background: "linear-gradient(to bottom, transparent, rgba(74,144,184,0.3) 10%, rgba(74,144,184,0.3) 90%, transparent)" }} />
             <div className="space-y-3">
               {schedule.map((item, i) => (
                 <div
@@ -231,17 +234,17 @@ export default function Index() {
                 >
                   <div className="flex-shrink-0">
                     <div className="w-[4.5rem] h-[4.5rem] rounded-full flex items-center justify-center z-10 transition-all"
-                      style={{ background: "linear-gradient(135deg, #fde8ec, #fcd0d8)", border: "1px solid rgba(201,122,143,0.2)" }}>
-                      <Icon name={item.icon} size={20} style={{ color: "#c97a8f" } as CSSProperties} />
+                      style={{ background: "linear-gradient(135deg, #dceef8, #bcdaee)", border: "1px solid rgba(74,144,184,0.2)" }}>
+                      <Icon name={item.icon} size={20} style={{ color: "#4a90b8" } as CSSProperties} />
                     </div>
                   </div>
                   <div className="glass-card flex-1 p-5 mb-1 group-hover:-translate-y-0.5 transition-all duration-300">
                     <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <span className="font-body font-semibold text-sm" style={{ color: "#c97a8f" }}>{item.time}</span>
-                      <span className="w-3 h-px inline-block" style={{ background: "rgba(201,122,143,0.4)" }} />
-                      <h3 className="font-display text-lg" style={{ color: "#3a2530" }}>{item.title}</h3>
+                      <span className="font-body font-semibold text-sm" style={{ color: "#4a90b8" }}>{item.time}</span>
+                      <span className="w-3 h-px inline-block" style={{ background: "rgba(74,144,184,0.4)" }} />
+                      <h3 className="font-display text-lg" style={{ color: "#1a3a50" }}>{item.title}</h3>
                     </div>
-                    <p className="font-body text-sm" style={{ color: "#9a7080" }}>{item.desc}</p>
+                    <p className="font-body text-sm" style={{ color: "#5a8fa8" }}>{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -251,13 +254,13 @@ export default function Index() {
       </section>
 
       {/* ─── DRESS CODE ─── */}
-      <section className="py-20 px-6" id="dresscode" style={{ background: "#fdf8f5" }}>
+      <section className="py-20 px-6" id="dresscode" style={{ background: "#edf5fa" }}>
         <div ref={dressRef.ref} className="max-w-4xl mx-auto">
           <div className={`text-center mb-14 transition-all duration-700 ${dressRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#c97a8f" }}>Образ</p>
+            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#4a90b8" }}>Образ</p>
             <h2 className="font-display text-4xl md:text-5xl font-light rose-text mb-3">Дресс-код</h2>
             <div className="section-divider mt-5" />
-            <p className="font-body text-sm mt-5 max-w-lg mx-auto" style={{ color: "#9a7080" }}>
+            <p className="font-body text-sm mt-5 max-w-lg mx-auto" style={{ color: "#5a8fa8" }}>
               Мы будем рады, если ваш образ будет гармонировать с палитрой нашего торжества
             </p>
           </div>
@@ -273,12 +276,12 @@ export default function Index() {
                 style={{ transitionDelay: `${i * 150}ms` }}
               >
                 <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5"
-                  style={{ background: "linear-gradient(135deg, #fde8ec, #fcd0d8)" }}>
-                  <Icon name={item.icon} size={22} style={{ color: "#c97a8f" } as CSSProperties} />
+                  style={{ background: "linear-gradient(135deg, #dceef8, #bcdaee)" }}>
+                  <Icon name={item.icon} size={22} style={{ color: "#4a90b8" } as CSSProperties} />
                 </div>
-                <h3 className="font-body uppercase tracking-widest text-xs mb-3" style={{ color: "#c97a8f" }}>{item.title}</h3>
+                <h3 className="font-body uppercase tracking-widest text-xs mb-3" style={{ color: "#4a90b8" }}>{item.title}</h3>
                 {item.lines.map((l, j) => (
-                  <p key={j} className="font-body text-sm mt-1" style={{ color: j === 0 ? "#3a2530" : "#9a7080" }}>{l}</p>
+                  <p key={j} className="font-body text-sm mt-1" style={{ color: j === 0 ? "#1a3a50" : "#5a8fa8" }}>{l}</p>
                 ))}
               </div>
             ))}
@@ -296,8 +299,8 @@ export default function Index() {
             ].map((c) => (
               <div key={c.label} className="flex flex-col items-center gap-2">
                 <div className="w-10 h-10 rounded-full shadow-sm border"
-                  style={{ background: c.hex, borderColor: "rgba(201,122,143,0.2)" }} />
-                <span className="font-body text-xs" style={{ color: "#9a7080" }}>{c.label}</span>
+                  style={{ background: c.hex, borderColor: "rgba(74,144,184,0.2)" }} />
+                <span className="font-body text-xs" style={{ color: "#5a8fa8" }}>{c.label}</span>
               </div>
             ))}
           </div>
@@ -305,18 +308,18 @@ export default function Index() {
       </section>
 
       {/* ─── MAP ─── */}
-      <section className="py-20 px-6" id="map" style={{ background: "#fff" }}>
+      <section className="py-20 px-6" id="map" style={{ background: "rgba(255,255,255,0.65)" }}>
         <div ref={mapRef.ref} className="max-w-4xl mx-auto">
           <div className={`text-center mb-12 transition-all duration-700 ${mapRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#c97a8f" }}>Как добраться</p>
+            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#4a90b8" }}>Как добраться</p>
             <h2 className="font-display text-4xl md:text-5xl font-light rose-text mb-3">Место проведения</h2>
             <div className="section-divider mt-5" />
-            <p className="font-body text-sm mt-4" style={{ color: "#9a7080" }}>
+            <p className="font-body text-sm mt-4" style={{ color: "#5a8fa8" }}>
               Загородный клуб «Weekend» · г. Ростов-на-Дону, ул. Левобережная, 47
             </p>
           </div>
           <div className={`transition-all duration-700 delay-200 ${mapRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <div className="rounded-2xl overflow-hidden shadow-md" style={{ border: "1px solid rgba(201,122,143,0.18)" }}>
+            <div className="rounded-2xl overflow-hidden shadow-md" style={{ border: "1px solid rgba(74,144,184,0.18)" }}>
               <iframe
                 title="Карта — Загородный клуб Weekend"
                 src="https://yandex.ru/map-widget/v1/?text=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2-%D0%BD%D0%B0-%D0%94%D0%BE%D0%BD%D1%83%2C+%D1%83%D0%BB.+%D0%9B%D0%B5%D0%B2%D0%BE%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F%2C+47&z=15&l=map"
@@ -341,7 +344,7 @@ export default function Index() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-body text-sm uppercase tracking-widest transition-all hover:-translate-y-0.5"
-                style={{ background: "#fde8ec", color: "#c97a8f", border: "1px solid rgba(201,122,143,0.25)" }}
+                style={{ background: "#dceef8", color: "#4a90b8", border: "1px solid rgba(74,144,184,0.25)" }}
               >
                 <Icon name="Globe" size={15} />
                 Открыть в Google Maps
@@ -352,23 +355,23 @@ export default function Index() {
       </section>
 
       {/* ─── RSVP ─── */}
-      <section className="py-20 px-6" id="rsvp" style={{ background: "#fdf8f5" }}>
+      <section className="py-20 px-6" id="rsvp" style={{ background: "#edf5fa" }}>
         <div ref={rsvpRef.ref} className="max-w-xl mx-auto">
           <div className={`text-center mb-12 transition-all duration-700 ${rsvpRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#c97a8f" }}>Ответ гостя</p>
+            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#4a90b8" }}>Ответ гостя</p>
             <h2 className="font-display text-4xl md:text-5xl font-light rose-text mb-3">Подтверждение</h2>
             <div className="section-divider mt-5" />
-            <p className="text-sm mt-5 font-body" style={{ color: "#b09aa0" }}>Просим подтвердить присутствие до 1 августа 2026</p>
+            <p className="text-sm mt-5 font-body" style={{ color: "#7aaabb" }}>Просим подтвердить присутствие до 1 августа 2026</p>
           </div>
 
           {submitted ? (
             <div className="glass-card p-12 text-center">
               <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
-                style={{ background: "linear-gradient(135deg, #fde8ec, #fcd0d8)" }}>
-                <Icon name="Heart" size={32} style={{ color: "#c97a8f" } as CSSProperties} />
+                style={{ background: "linear-gradient(135deg, #dceef8, #bcdaee)" }}>
+                <Icon name="Heart" size={32} style={{ color: "#4a90b8" } as CSSProperties} />
               </div>
               <h3 className="font-display text-3xl rose-text mb-3">Спасибо!</h3>
-              <p className="font-body" style={{ color: "#9a7080" }}>Мы рады, что вы будете с нами в этот особенный день</p>
+              <p className="font-body" style={{ color: "#5a8fa8" }}>Мы рады, что вы будете с нами в этот особенный день</p>
             </div>
           ) : (
             <form
@@ -376,23 +379,23 @@ export default function Index() {
               className={`glass-card p-8 space-y-5 transition-all duration-700 ${rsvpRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
             >
               <div>
-                <label className="block font-body text-xs uppercase tracking-widest mb-2" style={{ color: "#b09aa0" }}>Ваше имя *</label>
+                <label className="block font-body text-xs uppercase tracking-widest mb-2" style={{ color: "#7aaabb" }}>Ваше имя *</label>
                 <input
                   required
                   value={form.name}
                   onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                   placeholder="Иван Иванов"
                   className="w-full rounded-xl px-4 py-3 font-body focus:outline-none transition-all"
-                  style={{ background: "#fdf0f3", border: "1px solid rgba(201,122,143,0.25)", color: "#3a2530" }}
+                  style={{ background: "#e8f3fa", border: "1px solid rgba(74,144,184,0.25)", color: "#1a3a50" }}
                 />
               </div>
               <div>
-                <label className="block font-body text-xs uppercase tracking-widest mb-2" style={{ color: "#b09aa0" }}>Количество гостей</label>
+                <label className="block font-body text-xs uppercase tracking-widest mb-2" style={{ color: "#7aaabb" }}>Количество гостей</label>
                 <select
                   value={form.guests}
                   onChange={e => setForm(f => ({ ...f, guests: e.target.value }))}
                   className="w-full rounded-xl px-4 py-3 font-body focus:outline-none transition-all"
-                  style={{ background: "#fdf0f3", border: "1px solid rgba(201,122,143,0.25)", color: "#3a2530" }}
+                  style={{ background: "#e8f3fa", border: "1px solid rgba(74,144,184,0.25)", color: "#1a3a50" }}
                 >
                   {["1", "2", "3", "4"].map(n => (
                     <option key={n} value={n}>{n} {n === "1" ? "гость" : "гостя"}</option>
@@ -400,28 +403,28 @@ export default function Index() {
                 </select>
               </div>
               <div>
-                <label className="block font-body text-xs uppercase tracking-widest mb-2" style={{ color: "#b09aa0" }}>Пожелания по меню</label>
+                <label className="block font-body text-xs uppercase tracking-widest mb-2" style={{ color: "#7aaabb" }}>Пожелания по меню</label>
                 <input
                   value={form.diet}
                   onChange={e => setForm(f => ({ ...f, diet: e.target.value }))}
                   placeholder="Вегетарианское, аллергия..."
                   className="w-full rounded-xl px-4 py-3 font-body focus:outline-none transition-all"
-                  style={{ background: "#fdf0f3", border: "1px solid rgba(201,122,143,0.25)", color: "#3a2530" }}
+                  style={{ background: "#e8f3fa", border: "1px solid rgba(74,144,184,0.25)", color: "#1a3a50" }}
                 />
               </div>
               <div>
-                <label className="block font-body text-xs uppercase tracking-widest mb-2" style={{ color: "#b09aa0" }}>Пожелания молодожёнам</label>
+                <label className="block font-body text-xs uppercase tracking-widest mb-2" style={{ color: "#7aaabb" }}>Пожелания молодожёнам</label>
                 <textarea
                   rows={3}
                   value={form.message}
                   onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                   placeholder="Ваши тёплые слова..."
                   className="w-full rounded-xl px-4 py-3 font-body focus:outline-none transition-all resize-none"
-                  style={{ background: "#fdf0f3", border: "1px solid rgba(201,122,143,0.25)", color: "#3a2530" }}
+                  style={{ background: "#e8f3fa", border: "1px solid rgba(74,144,184,0.25)", color: "#1a3a50" }}
                 />
               </div>
               {error && (
-                <p className="text-sm text-center" style={{ color: "#c97a8f" }}>{error}</p>
+                <p className="text-sm text-center" style={{ color: "#4a90b8" }}>{error}</p>
               )}
               <button
                 type="submit"
@@ -437,10 +440,10 @@ export default function Index() {
       </section>
 
       {/* ─── CONTACTS ─── */}
-      <section className="py-20 px-6" id="contacts" style={{ background: "#fff" }}>
+      <section className="py-20 px-6" id="contacts" style={{ background: "rgba(255,255,255,0.65)" }}>
         <div ref={contactRef.ref} className="max-w-3xl mx-auto">
           <div className={`text-center mb-12 transition-all duration-700 ${contactRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#c97a8f" }}>Связь</p>
+            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: "#4a90b8" }}>Связь</p>
             <h2 className="font-display text-4xl md:text-5xl font-light rose-text mb-3">Контакты</h2>
             <div className="section-divider mt-5" />
           </div>
@@ -456,13 +459,13 @@ export default function Index() {
                 style={{ textDecoration: "none" }}
               >
                 <div className="w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center"
-                  style={{ background: "linear-gradient(135deg, #fde8ec, #fcd0d8)" }}>
-                  <Icon name="Phone" size={20} style={{ color: "#c97a8f" } as CSSProperties} />
+                  style={{ background: "linear-gradient(135deg, #dceef8, #bcdaee)" }}>
+                  <Icon name="Phone" size={20} style={{ color: "#4a90b8" } as CSSProperties} />
                 </div>
                 <div>
-                  <p className="font-body text-xs uppercase tracking-wider mb-0.5" style={{ color: "#b09aa0" }}>{c.label}</p>
-                  <p className="font-body font-medium" style={{ color: "#3a2530" }}>{c.value}</p>
-                  <p className="font-body text-xs" style={{ color: "#c97a8f" }}>{c.name}</p>
+                  <p className="font-body text-xs uppercase tracking-wider mb-0.5" style={{ color: "#7aaabb" }}>{c.label}</p>
+                  <p className="font-body font-medium" style={{ color: "#1a3a50" }}>{c.value}</p>
+                  <p className="font-body text-xs" style={{ color: "#4a90b8" }}>{c.name}</p>
                 </div>
               </a>
             ))}
@@ -471,9 +474,9 @@ export default function Index() {
       </section>
 
       {/* ─── FOOTER ─── */}
-      <footer className="py-12 px-6 text-center" style={{ borderTop: "1px solid rgba(201,122,143,0.15)" }}>
+      <footer className="py-12 px-6 text-center" style={{ borderTop: "1px solid rgba(74,144,184,0.15)" }}>
         <p className="font-display text-2xl rose-text mb-2">Игорь & Ксения</p>
-        <p className="font-body text-sm" style={{ color: "#c9a0ae" }}>30 августа 2026 · с любовью ♡</p>
+        <p className="font-body text-sm" style={{ color: "#7aaabb" }}>30 августа 2026 · с любовью ♡</p>
       </footer>
     </div>
   );
