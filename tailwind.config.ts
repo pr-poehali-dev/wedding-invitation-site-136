@@ -19,8 +19,9 @@ export default {
 			}
 		},
 		fontFamily: {
-				display: ['Playfair Display', 'serif'],
-				body: ['Raleway', 'sans-serif'],
+				display: ['Great Vibes', 'cursive'],
+				serif: ['Cormorant Garamond', 'serif'],
+				body: ['Lato', 'sans-serif'],
 			},
 			extend: {
 			colors: {
