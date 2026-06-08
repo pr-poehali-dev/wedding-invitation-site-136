@@ -5,7 +5,7 @@ import Icon from "@/components/ui/icon";
 const WEDDING_DATE = new Date("2026-08-30T16:00:00");
 const RSVP_URL = "https://functions.poehali.dev/a94d2141-f6b5-4e60-860b-2ecdc7bb5b3a";
 
-const BG_IMAGE = "https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/9379dbb3-c7bf-4e0d-a9a4-db23c2832e41.jpg";
+const BG_IMAGE = "https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/e2d71e8f-481c-4a03-8553-32b0f939241b.jpg";
 
 // Все цвета — бежево-тёплые тексты, зелёные акценты
 const C = {
@@ -53,13 +53,13 @@ function useCountdown(targetDate: Date) {
 function CountdownUnit({ value, label }: { value: number; label: string }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="rounded-2xl px-4 py-3 md:px-6 md:py-4 min-w-[70px] md:min-w-[90px] flex items-center justify-center shadow-sm"
-        style={{ background: C.cardBg, border: `1px solid ${C.border}` }}>
-        <span className="font-display text-4xl md:text-6xl leading-none" style={{ color: C.textStrong }}>
+      <div className="rounded-2xl px-4 py-3 md:px-6 md:py-4 min-w-[70px] md:min-w-[90px] flex items-center justify-center shadow-lg"
+        style={{ background: "rgba(20,32,12,0.88)", border: "1px solid rgba(168,184,136,0.4)", backdropFilter: "blur(10px)" }}>
+        <span className="font-display text-4xl md:text-6xl leading-none" style={{ color: "#e8dfc8" }}>
           {String(value).padStart(2, "0")}
         </span>
       </div>
-      <span className="mt-2 text-xs font-body uppercase tracking-widest" style={{ color: C.textMuted }}>{label}</span>
+      <span className="mt-2 text-xs font-body uppercase tracking-widest" style={{ color: "#c8bfa0" }}>{label}</span>
     </div>
   );
 }
@@ -100,6 +100,12 @@ const schedule = [
 const palette = [
   { label: "Тёмно-зелёный", hex: "#1e4a30" },
   { label: "Оливковый",     hex: "#4a5228" },
+  { label: "Пудровый",      hex: "#e8c8c0" },
+  { label: "Голубой",       hex: "#b8cce0" },
+  { label: "Ivory",         hex: "#f5f0e0" },
+  { label: "Шоколадный",    hex: "#3e2010" },
+  { label: "Бордо",         hex: "#6e1e2c" },
+  { label: "Чёрный",        hex: "#1a1a1a" },
 ];
 
 export default function Index() {
@@ -282,9 +288,9 @@ export default function Index() {
                     style={{ transitionDelay: `${i * 90}ms` }}
                   >
                     <div className="flex-shrink-0">
-                      <div className="w-[4.5rem] h-[4.5rem] rounded-full flex items-center justify-center z-10"
-                        style={{ background: C.sagePale, border: `1px solid ${C.border}` }}>
-                        <Icon name={item.icon} size={20} style={{ color: C.sage } as CSSProperties} />
+                      <div className="w-[4.5rem] h-[4.5rem] rounded-full flex items-center justify-center z-10 shadow-md"
+                        style={{ background: "rgba(20,42,14,0.90)", border: "1px solid rgba(168,184,136,0.5)" }}>
+                        <Icon name={item.icon} size={20} style={{ color: "#c8d8a8" } as CSSProperties} />
                       </div>
                     </div>
                     <div className="glass-card flex-1 p-5 mb-1 group-hover:-translate-y-0.5 transition-all duration-300">
@@ -313,12 +319,12 @@ export default function Index() {
                 Будем рады, если ваш образ будет в гармонии с нашей цветовой палитрой
               </p>
             </div>
-            <div className={`flex justify-center gap-10 transition-all duration-700 delay-200 ${dressRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            <div className={`flex flex-wrap justify-center gap-6 transition-all duration-700 delay-200 ${dressRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
               {palette.map((c) => (
-                <div key={c.label} className="flex flex-col items-center gap-3">
-                  <div className="w-16 h-16 rounded-full shadow-md border-2"
-                    style={{ background: c.hex, borderColor: C.border }} />
-                  <span className="font-body text-xs uppercase tracking-wider" style={{ color: C.textMuted }}>{c.label}</span>
+                <div key={c.label} className="flex flex-col items-center gap-2 w-16">
+                  <div className="w-14 h-14 rounded-full shadow-md"
+                    style={{ background: c.hex, border: "2px solid rgba(168,184,136,0.3)" }} />
+                  <span className="font-body text-xs text-center leading-tight" style={{ color: C.textMuted }}>{c.label}</span>
                 </div>
               ))}
             </div>
