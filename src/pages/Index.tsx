@@ -59,7 +59,7 @@ function CountdownUnit({ value, label }: { value: number; label: string }) {
           {String(value).padStart(2, "0")}
         </span>
       </div>
-      <span className="mt-2 text-xs font-body uppercase tracking-widest" style={{ color: "#c8bfa0" }}>{label}</span>
+      <span className="mt-2 text-xs font-body uppercase tracking-widest" style={{ color: "#7ab870" }}>{label}</span>
     </div>
   );
 }
@@ -315,8 +315,8 @@ export default function Index() {
                   >
                     <div className="flex-shrink-0">
                       <div className="w-[4.5rem] h-[4.5rem] rounded-full flex items-center justify-center z-10 shadow-md"
-                        style={{ background: "rgba(20,42,14,0.90)", border: "1px solid rgba(168,184,136,0.5)" }}>
-                        <Icon name={item.icon} size={20} style={{ color: "#c8d8a8" } as CSSProperties} />
+                        style={{ background: "rgba(60,10,18,0.88)", border: "1px solid rgba(180,60,80,0.45)" }}>
+                        <Icon name={item.icon} size={20} style={{ color: "#c8607a" } as CSSProperties} />
                       </div>
                     </div>
                     <div className="glass-card flex-1 p-5 mb-1 group-hover:-translate-y-0.5 transition-all duration-300">
