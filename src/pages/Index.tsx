@@ -59,7 +59,7 @@ function CountdownUnit({ value, label }: { value: number; label: string }) {
           {String(value).padStart(2, "0")}
         </span>
       </div>
-      <span className="mt-2 text-xs font-body uppercase tracking-widest" style={{ color: "#7ab870" }}>{label}</span>
+      <span className="mt-2 text-xs font-body uppercase tracking-widest" style={{ color: "#6b7a40" }}>{label}</span>
     </div>
   );
 }
