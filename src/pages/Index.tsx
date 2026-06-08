@@ -5,7 +5,7 @@ import Icon from "@/components/ui/icon";
 const WEDDING_DATE = new Date("2026-08-30T16:00:00");
 const RSVP_URL = "https://functions.poehali.dev/a94d2141-f6b5-4e60-860b-2ecdc7bb5b3a";
 
-const BG_IMAGE = "https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/e2d71e8f-481c-4a03-8553-32b0f939241b.jpg";
+const BG_IMAGE = "https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/aea47906-525d-4f4c-a6d2-052319f03fd7.jpg";
 
 // Все цвета — бежево-тёплые тексты, зелёные акценты
 const C = {
