@@ -24,8 +24,8 @@ const C = {
   // фоны
   cardBg:     "rgba(255,252,245,0.72)",
   inputBg:    "rgba(255,252,240,0.85)",
-  sectionAlt: "rgba(168,184,136,0.12)",
-  sectionWhite:"rgba(255,252,240,0.55)",
+  sectionAlt: "rgba(168,184,136,0.08)",
+  sectionWhite:"rgba(255,252,240,0.28)",
   // границы
   border:     "rgba(107,117,69,0.2)",
   borderMid:  "rgba(107,117,69,0.3)",
@@ -154,23 +154,21 @@ export default function Index() {
       <style>{`
         .bg-responsive-pattern {
           background-image: url(${BG_IMAGE});
-          background-size: cover;
+          background-size: 300px auto;
           background-attachment: fixed;
           background-position: center center;
+          background-repeat: repeat;
         }
         @media (max-width: 640px) {
           .bg-responsive-pattern {
             background-image: url(${BG_IMAGE_MOBILE});
             background-attachment: scroll;
-            background-size: cover;
-            background-position: top center;
+            background-size: 180px auto;
+            background-position: top left;
+            background-repeat: repeat;
           }
         }
       `}</style>
-      {/* Постоянный тёмный оверлей поверх всей страницы */}
-      <div className="fixed inset-0 z-0 pointer-events-none" style={{
-        background: "linear-gradient(160deg, rgba(18,28,12,0.72) 0%, rgba(30,50,20,0.68) 50%, rgba(18,28,12,0.75) 100%)"
-      }} />
 
       {/* ─── ЯКОРНОЕ МЕНЮ ─── */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center py-3 px-4"
