@@ -6,6 +6,7 @@ const WEDDING_DATE = new Date("2026-08-30T16:00:00");
 const RSVP_URL = "https://functions.poehali.dev/a94d2141-f6b5-4e60-860b-2ecdc7bb5b3a";
 
 const BG_IMAGE = "https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/aea47906-525d-4f4c-a6d2-052319f03fd7.jpg";
+const BG_IMAGE_MOBILE = "https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/ca24327e-9600-4580-80bd-d70fc21c2522.jpg";
 
 // Все цвета — бежево-тёплые тексты, зелёные акценты
 const C = {
@@ -148,14 +149,24 @@ export default function Index() {
 
   // Единый глобальный фон — картинка + тёмный полупрозрачный оверлей
   const globalBg: CSSProperties = {
-    backgroundImage: `url(${BG_IMAGE})`,
     backgroundSize: "cover",
     backgroundAttachment: "fixed",
     backgroundPosition: "center center",
   };
 
   return (
-    <div className="min-h-screen font-body overflow-x-hidden relative" style={globalBg}>
+    <div className="min-h-screen font-body overflow-x-hidden relative bg-responsive-pattern" style={globalBg}>
+      <style>{`
+        .bg-responsive-pattern {
+          background-image: url(${BG_IMAGE});
+        }
+        @media (max-width: 640px) {
+          .bg-responsive-pattern {
+            background-image: url(${BG_IMAGE_MOBILE});
+            background-attachment: scroll;
+          }
+        }
+      `}</style>
       {/* Постоянный тёмный оверлей поверх всей страницы */}
       <div className="fixed inset-0 z-0 pointer-events-none" style={{
         background: "linear-gradient(160deg, rgba(18,28,12,0.72) 0%, rgba(30,50,20,0.68) 50%, rgba(18,28,12,0.75) 100%)"
