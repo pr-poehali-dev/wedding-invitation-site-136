@@ -147,23 +147,23 @@ export default function Index() {
   const inputStyle: CSSProperties  = { background: C.inputBg, border: `1px solid ${C.borderMid}`, color: C.textStrong };
   const labelStyle: CSSProperties  = { color: C.textLabel };
 
-  // Единый глобальный фон — картинка + тёмный полупрозрачный оверлей
-  const globalBg: CSSProperties = {
-    backgroundSize: "cover",
-    backgroundAttachment: "fixed",
-    backgroundPosition: "center center",
-  };
+  const globalBg: CSSProperties = {};
 
   return (
     <div className="min-h-screen font-body overflow-x-hidden relative bg-responsive-pattern" style={globalBg}>
       <style>{`
         .bg-responsive-pattern {
           background-image: url(${BG_IMAGE});
+          background-size: cover;
+          background-attachment: fixed;
+          background-position: center center;
         }
         @media (max-width: 640px) {
           .bg-responsive-pattern {
             background-image: url(${BG_IMAGE_MOBILE});
             background-attachment: scroll;
+            background-size: cover;
+            background-position: top center;
           }
         }
       `}</style>
