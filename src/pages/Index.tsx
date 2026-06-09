@@ -5,8 +5,7 @@ import Icon from "@/components/ui/icon";
 const WEDDING_DATE = new Date("2026-08-30T16:00:00");
 const RSVP_URL = "https://functions.poehali.dev/a94d2141-f6b5-4e60-860b-2ecdc7bb5b3a";
 
-const BG_IMAGE = "https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/a644e258-153f-4719-8b76-d240e755a08a.jpg";
-const BG_IMAGE_MOBILE = "https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/c85d5f2b-d6f4-461e-b262-20e1b7d226fe.jpg";
+const BG_IMAGE = "https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/fe90672b-dc76-4030-941c-f0e58a9662c5.jpg";
 
 // Все цвета — бежево-тёплые тексты, зелёные акценты
 const C = {
@@ -24,8 +23,8 @@ const C = {
   // фоны
   cardBg:     "rgba(255,252,245,0.72)",
   inputBg:    "rgba(255,252,240,0.85)",
-  sectionAlt: "rgba(168,184,136,0.08)",
-  sectionWhite:"rgba(255,252,240,0.28)",
+  sectionAlt: "rgba(168,184,136,0.12)",
+  sectionWhite:"rgba(255,252,240,0.55)",
   // границы
   border:     "rgba(107,117,69,0.2)",
   borderMid:  "rgba(107,117,69,0.3)",
@@ -154,21 +153,22 @@ export default function Index() {
       <style>{`
         .bg-responsive-pattern {
           background-image: url(${BG_IMAGE});
-          background-size: cover;
+          background-size: 420px 420px;
           background-attachment: fixed;
-          background-position: center center;
-          background-repeat: no-repeat;
+          background-repeat: repeat;
         }
         @media (max-width: 640px) {
           .bg-responsive-pattern {
-            background-image: url(${BG_IMAGE_MOBILE});
+            background-size: 260px 260px;
             background-attachment: scroll;
-            background-size: cover;
-            background-position: top center;
-            background-repeat: no-repeat;
           }
         }
       `}</style>
+
+      {/* Постоянный тёмный оверлей поверх всей страницы */}
+      <div className="fixed inset-0 z-0 pointer-events-none" style={{
+        background: "linear-gradient(160deg, rgba(18,28,12,0.72) 0%, rgba(30,50,20,0.68) 50%, rgba(18,28,12,0.75) 100%)"
+      }} />
 
       {/* ─── ЯКОРНОЕ МЕНЮ ─── */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center py-3 px-4"
