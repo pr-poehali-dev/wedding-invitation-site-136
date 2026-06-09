@@ -5,8 +5,8 @@ import Icon from "@/components/ui/icon";
 const WEDDING_DATE = new Date("2026-08-30T16:00:00");
 const RSVP_URL = "https://functions.poehali.dev/a94d2141-f6b5-4e60-860b-2ecdc7bb5b3a";
 
-const BG_IMAGE = "https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/fe47e1de-6709-4026-bb93-f3e70383d634.jpg";
-const BG_IMAGE_MOBILE = "https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/bbf34b1e-1e14-4cec-a52d-8e09379e080d.jpg";
+const BG_IMAGE = "https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/a644e258-153f-4719-8b76-d240e755a08a.jpg";
+const BG_IMAGE_MOBILE = "https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/c85d5f2b-d6f4-461e-b262-20e1b7d226fe.jpg";
 
 // Все цвета — бежево-тёплые тексты, зелёные акценты
 const C = {
@@ -154,18 +154,18 @@ export default function Index() {
       <style>{`
         .bg-responsive-pattern {
           background-image: url(${BG_IMAGE});
-          background-size: 300px auto;
+          background-size: cover;
           background-attachment: fixed;
           background-position: center center;
-          background-repeat: repeat;
+          background-repeat: no-repeat;
         }
         @media (max-width: 640px) {
           .bg-responsive-pattern {
             background-image: url(${BG_IMAGE_MOBILE});
             background-attachment: scroll;
-            background-size: 180px auto;
-            background-position: top left;
-            background-repeat: repeat;
+            background-size: cover;
+            background-position: top center;
+            background-repeat: no-repeat;
           }
         }
       `}</style>
