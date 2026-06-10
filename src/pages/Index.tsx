@@ -212,7 +212,7 @@ export default function Index() {
           <div ref={heroRef.ref} className="relative z-10 text-center px-6 max-w-4xl mx-auto">
             <div className={`transition-all duration-1000 ${heroRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
               <p className="font-body uppercase tracking-[0.5em] text-xs mb-8" style={{ color: C.textMuted }}>
-                мы приглашаем вас
+                приглашаем вас на торжество по случаю нашей свадьбы
               </p>
             </div>
 
