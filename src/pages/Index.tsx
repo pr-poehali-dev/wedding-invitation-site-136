@@ -35,7 +35,7 @@ export default function Index() {
             { label: "Программа",   href: "#schedule"  },
             { label: "Дресс-код",   href: "#dresscode" },
             { label: "Место",       href: "#map"       },
-            { label: "Подтвердить", href: "#rsvp"      },
+            { label: "Анкета гостя", href: "#rsvp"      },
           ].map(item => (
             <li key={item.href}>
               <a
