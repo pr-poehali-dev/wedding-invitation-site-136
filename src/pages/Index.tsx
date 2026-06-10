@@ -153,13 +153,13 @@ export default function Index() {
       <style>{`
         .bg-responsive-pattern {
           background-image: url(${BG_IMAGE});
-          background-size: 700px 700px;
+          background-size: 1000px 1000px;
           background-attachment: fixed;
           background-repeat: repeat;
         }
         @media (max-width: 640px) {
           .bg-responsive-pattern {
-            background-size: 380px 380px;
+            background-size: 520px 520px;
             background-attachment: scroll;
           }
         }
