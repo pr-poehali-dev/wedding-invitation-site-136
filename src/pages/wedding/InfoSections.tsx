@@ -36,7 +36,7 @@ export default function InfoSections() {
                 <h3 className="font-body uppercase tracking-widest text-xs mb-3" style={{ color: C.textMuted }}>{item.title}</h3>
                 {item.lines.map((l, j) => (
                   <p key={j} className={`font-body ${j === 0 ? "text-lg font-light" : "text-sm mt-1"}`}
-                    style={{ color: j === 0 ? C.textStrong : C.textMid }}>{l}</p>
+                    style={{ color: C.textStrong }}>{l}</p>
                 ))}
               </div>
             ))}
