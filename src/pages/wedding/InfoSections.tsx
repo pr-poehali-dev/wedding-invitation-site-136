@@ -36,7 +36,7 @@ export default function InfoSections() {
                 <h3 className="font-body uppercase tracking-widest text-xs mb-3" style={{ color: C.textMuted }}>{item.title}</h3>
                 {item.lines.map((l, j) => (
                   <p key={j} className={`font-body ${j === 0 ? "text-lg font-light" : "text-sm mt-1"}`}
-                    style={{ color: C.textStrong }}>{l}</p>
+                    style={{ color: j === 0 ? C.textStrong : C.textMid }}>{l}</p>
                 ))}
               </div>
             ))}
@@ -113,7 +113,7 @@ export default function InfoSections() {
             <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: C.textMuted }}>Как добраться</p>
             <h2 className="font-display mb-3" style={{ fontSize: "clamp(2.5rem,6vw,4rem)", color: C.textStrong }}>Место проведения</h2>
             <div className="section-divider mt-5" />
-            <p className="font-body text-sm mt-4" style={{ color: C.textMid }}>
+            <p className="font-body text-sm mt-4" style={{ color: C.olive }}>
               Загородный клуб «Weekend» · г. Ростов-на-Дону, ул. Левобережная, 47
             </p>
           </div>
