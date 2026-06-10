@@ -5,7 +5,7 @@ import Icon from "@/components/ui/icon";
 const WEDDING_DATE = new Date("2026-08-30T16:00:00");
 const RSVP_URL = "https://functions.poehali.dev/a94d2141-f6b5-4e60-860b-2ecdc7bb5b3a";
 
-const BG_IMAGE = "https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/fe90672b-dc76-4030-941c-f0e58a9662c5.jpg";
+const BG_IMAGE = "https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/954c0db7-b763-4291-8c91-8007ceda3764.jpg";
 
 // Все цвета — бежево-тёплые тексты, зелёные акценты
 const C = {
@@ -153,13 +153,13 @@ export default function Index() {
       <style>{`
         .bg-responsive-pattern {
           background-image: url(${BG_IMAGE});
-          background-size: 420px 420px;
+          background-size: 700px 700px;
           background-attachment: fixed;
           background-repeat: repeat;
         }
         @media (max-width: 640px) {
           .bg-responsive-pattern {
-            background-size: 260px 260px;
+            background-size: 380px 380px;
             background-attachment: scroll;
           }
         }
