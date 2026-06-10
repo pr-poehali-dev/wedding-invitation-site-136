@@ -34,8 +34,8 @@ export default function HeroSection() {
 
         <div ref={heroRef.ref} className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <div className={`transition-all duration-1000 ${heroRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body uppercase tracking-[0.5em] text-xs mb-8" style={{ color: C.textMuted }}>
-              приглашаем вас на торжество по случаю нашей свадьбы
+            <p className="font-display mb-8" style={{ color: C.textMid, fontSize: "clamp(1.1rem, 3vw, 1.8rem)", fontStyle: "italic" }}>
+              Приглашаем вас на торжество по случаю нашей свадьбы
             </p>
           </div>
 
