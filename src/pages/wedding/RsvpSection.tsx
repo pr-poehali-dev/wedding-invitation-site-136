@@ -85,26 +85,6 @@ export default function RsvpSection() {
                   ))}
                 </select>
               </div>
-              <div>
-                <label className="block font-body text-xs uppercase tracking-widest mb-2" style={labelStyle}>Пожелания по меню</label>
-                <input
-                  value={form.diet}
-                  onChange={e => setForm(f => ({ ...f, diet: e.target.value }))}
-                  placeholder="Вегетарианское, аллергия на орехи..."
-                  className="w-full rounded-xl px-4 py-3 font-body focus:outline-none transition-all"
-                  style={inputStyle}
-                />
-              </div>
-              <div>
-                <label className="block font-body text-xs uppercase tracking-widest mb-2" style={labelStyle}>Пожелания молодожёнам</label>
-                <input
-                  value={form.message}
-                  onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-                  placeholder="Напишите пожелание..."
-                  className="w-full rounded-xl px-4 py-3 font-body focus:outline-none transition-all"
-                  style={inputStyle}
-                />
-              </div>
               {error && (
                 <p className="text-sm text-center" style={{ color: C.sage }}>{error}</p>
               )}
