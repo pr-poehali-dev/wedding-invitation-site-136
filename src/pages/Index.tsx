@@ -31,11 +31,12 @@ export default function Index() {
         style={{ background: "rgba(18,28,12,0.72)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(168,184,136,0.15)" }}>
         <ul className="flex flex-wrap justify-center gap-1 md:gap-2">
           {[
-            { label: "Детали",      href: "#details"   },
-            { label: "Программа",   href: "#schedule"  },
-            { label: "Дресс-код",   href: "#dresscode" },
-            { label: "Место",       href: "#map"       },
+            { label: "Детали",       href: "#details"   },
+            { label: "Программа",    href: "#schedule"  },
+            { label: "Дресс-код",    href: "#dresscode" },
             { label: "Анкета гостя", href: "#rsvp"      },
+            { label: "Место",        href: "#map"       },
+            { label: "Контакты",     href: "#contacts"  },
           ].map(item => (
             <li key={item.href}>
               <a

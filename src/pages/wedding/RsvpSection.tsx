@@ -131,40 +131,6 @@ export default function RsvpSection() {
         </div>
       </section>
 
-      {/* ─── CONTACTS ─── */}
-      <section className="py-20 px-6" id="contacts" style={{ background: C.sectionWhite }}>
-        <div ref={contactRef.ref} className="max-w-3xl mx-auto">
-          <div className={`text-center mb-12 transition-all duration-700 ${contactRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: C.textMuted }}>Связь</p>
-            <h2 className="font-display mb-3" style={{ fontSize: "clamp(2.5rem,6vw,4rem)", color: C.textStrong }}>Контакты</h2>
-            <div className="section-divider mt-5" />
-          </div>
-          <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 max-w-xl mx-auto transition-all duration-700 delay-200 ${contactRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            {[
-              { label: "Телефон жениха",  value: "+7 (904) 759-96-05", name: "Игорь"  },
-              { label: "Телефон невесты", value: "+7 (928) 624-77-38", name: "Ксения" },
-            ].map((c, i) => (
-              <a
-                key={i}
-                href={`tel:${c.value.replace(/\D/g, "")}`}
-                className="glass-card p-6 flex items-center gap-5 hover:-translate-y-1 transition-all duration-300"
-                style={{ textDecoration: "none" }}
-              >
-                <div className="w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center"
-                  style={{ background: C.sagePale, border: `1px solid ${C.border}` }}>
-                  <Icon name="Phone" size={20} style={{ color: C.sage } as CSSProperties} />
-                </div>
-                <div>
-                  <p className="font-body text-xs uppercase tracking-wider mb-0.5" style={{ color: C.textMuted }}>{c.label}</p>
-                  <p className="font-body font-light" style={{ color: C.textStrong }}>{c.value}</p>
-                  <p className="font-body text-xs" style={{ color: C.sage }}>{c.name}</p>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ─── MAP ─── */}
       <section className="py-20 px-6" id="map" style={{ background: C.sectionAlt }}>
         <div ref={mapRef.ref} className="max-w-4xl mx-auto">
@@ -207,6 +173,40 @@ export default function RsvpSection() {
                 Google Maps
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── CONTACTS ─── */}
+      <section className="py-20 px-6" id="contacts" style={{ background: C.sectionWhite }}>
+        <div ref={contactRef.ref} className="max-w-3xl mx-auto">
+          <div className={`text-center mb-12 transition-all duration-700 ${contactRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: C.textMuted }}>Связь</p>
+            <h2 className="font-display mb-3" style={{ fontSize: "clamp(2.5rem,6vw,4rem)", color: C.textStrong }}>Контакты</h2>
+            <div className="section-divider mt-5" />
+          </div>
+          <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 max-w-xl mx-auto transition-all duration-700 delay-200 ${contactRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            {[
+              { label: "Телефон жениха",  value: "+7 (904) 759-96-05", name: "Игорь"  },
+              { label: "Телефон невесты", value: "+7 (928) 624-77-38", name: "Ксения" },
+            ].map((c, i) => (
+              <a
+                key={i}
+                href={`tel:${c.value.replace(/\D/g, "")}`}
+                className="glass-card p-6 flex items-center gap-5 hover:-translate-y-1 transition-all duration-300"
+                style={{ textDecoration: "none" }}
+              >
+                <div className="w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center"
+                  style={{ background: C.sagePale, border: `1px solid ${C.border}` }}>
+                  <Icon name="Phone" size={20} style={{ color: C.sage } as CSSProperties} />
+                </div>
+                <div>
+                  <p className="font-body text-xs uppercase tracking-wider mb-0.5" style={{ color: C.textMuted }}>{c.label}</p>
+                  <p className="font-body font-light" style={{ color: C.textStrong }}>{c.value}</p>
+                  <p className="font-body text-xs" style={{ color: C.sage }}>{c.name}</p>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>
