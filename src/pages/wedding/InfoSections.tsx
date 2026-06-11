@@ -13,7 +13,7 @@ export default function InfoSections() {
       <section className="py-20 px-6" id="details" style={{ background: C.sectionAlt }}>
         <div ref={dateRef.ref} className="max-w-5xl mx-auto">
           <div className={`text-center mb-14 transition-all duration-700 ${dateRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: C.textMuted }}>Когда и где</p>
+
             <h2 className="font-display mb-3" style={{ fontSize: "clamp(2.5rem,6vw,4rem)", color: C.textStrong }}>Детали торжества</h2>
             <div className="section-divider mt-5" />
           </div>
@@ -47,7 +47,7 @@ export default function InfoSections() {
       <section className="py-20 px-6" id="schedule" style={{ background: C.sectionWhite }}>
         <div ref={scheduleRef.ref} className="max-w-2xl mx-auto">
           <div className={`text-center mb-14 transition-all duration-700 ${scheduleRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: C.textMuted }}>Программа</p>
+
             <h2 className="font-display mb-3" style={{ fontSize: "clamp(2.5rem,6vw,4rem)", color: C.textStrong }}>Расписание дня</h2>
             <div className="section-divider mt-5" />
           </div>
@@ -86,7 +86,7 @@ export default function InfoSections() {
       <section className="py-20 px-6" id="dresscode" style={{ background: C.sectionAlt }}>
         <div ref={dressRef.ref} className="max-w-xl mx-auto text-center">
           <div className={`transition-all duration-700 ${dressRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: C.textMuted }}>Образ</p>
+
             <h2 className="font-display mb-3" style={{ fontSize: "clamp(2.5rem,6vw,4rem)", color: C.textStrong }}>Дресс-код</h2>
             <div className="section-divider mt-5" />
             <p className="font-body text-sm mt-6 mb-10 leading-relaxed" style={{ color: C.textMid }}>

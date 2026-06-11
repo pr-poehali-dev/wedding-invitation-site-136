@@ -41,7 +41,7 @@ export default function RsvpSection() {
       <section className="py-20 px-6" id="rsvp" style={{ background: C.sectionAlt }}>
         <div ref={rsvpRef.ref} className="max-w-xl mx-auto">
           <div className={`text-center mb-12 transition-all duration-700 ${rsvpRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: C.textMuted }}>Ответ гостя</p>
+
             <h2 className="font-display mb-3" style={{ fontSize: "clamp(2.5rem,6vw,4rem)", color: C.textStrong }}>Подтверждение</h2>
             <div className="section-divider mt-5" />
             <p className="text-sm mt-5 font-body" style={{ color: C.textMuted }}>Просим подтвердить присутствие до 1 августа 2026</p>
@@ -135,7 +135,7 @@ export default function RsvpSection() {
       <section className="py-20 px-6" id="map" style={{ background: C.sectionAlt }}>
         <div ref={mapRef.ref} className="max-w-4xl mx-auto">
           <div className={`text-center mb-12 transition-all duration-700 ${mapRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: C.textMuted }}>Как добраться</p>
+
             <h2 className="font-display mb-3" style={{ fontSize: "clamp(2.5rem,6vw,4rem)", color: C.textStrong }}>Место проведения</h2>
             <div className="section-divider mt-5" />
             <p className="font-body text-sm mt-4" style={{ color: "ivory" }}>
@@ -181,7 +181,7 @@ export default function RsvpSection() {
       <section className="py-20 px-6" id="contacts" style={{ background: C.sectionWhite }}>
         <div ref={contactRef.ref} className="max-w-3xl mx-auto">
           <div className={`text-center mb-12 transition-all duration-700 ${contactRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: C.textMuted }}>Связь</p>
+
             <h2 className="font-display mb-3" style={{ fontSize: "clamp(2.5rem,6vw,4rem)", color: C.textStrong }}>Контакты</h2>
             <div className="section-divider mt-5" />
           </div>

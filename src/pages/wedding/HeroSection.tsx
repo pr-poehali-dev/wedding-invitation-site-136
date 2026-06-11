@@ -79,7 +79,7 @@ export default function HeroSection() {
       {/* ─── COUNTDOWN ─── */}
       <section className="py-20 px-6" style={{ background: C.sectionWhite }}>
         <div className="max-w-3xl mx-auto text-center">
-          <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: C.textMuted }}>До торжества</p>
+
           <h2 className="font-display mb-12" style={{ fontSize: "clamp(2.5rem,6vw,4rem)", color: C.textStrong }}>Обратный отсчёт</h2>
           <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
             <CountdownUnit value={timeLeft.days}    label="дней"   />
