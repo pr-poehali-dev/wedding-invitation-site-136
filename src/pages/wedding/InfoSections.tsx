@@ -91,7 +91,7 @@ export default function InfoSections() {
             <h2 className="font-display mb-3" style={{ fontSize: "clamp(2.5rem,6vw,4rem)", color: C.textStrong }}>Дресс-код</h2>
             <div className="section-divider mt-5" />
             <p className="font-body text-sm mt-6 mb-10 leading-relaxed" style={{ color: C.textMid }}>
-              Мы будем рады, если вы выберете наряды пастельных тонов, которые отлично гармонируют с концепцией нашего торжества<br className="hidden md:block" /> (ниже продемонстрированы примерные цвета)
+              Мы будем рады, если вы выберете наряды пастельных тонов, которые отлично гармонируют с концепцией нашего торжества<br className="hidden md:block" /> (ниже продемонстрированы примерные оттенки)
             </p>
           </div>
           <div className={`flex flex-wrap justify-center gap-6 transition-all duration-700 delay-200 ${dressRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
