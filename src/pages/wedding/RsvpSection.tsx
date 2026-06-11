@@ -8,7 +8,7 @@ export default function RsvpSection() {
   const contactRef = useInView(0.2);
   const mapRef     = useInView(0.2);
 
-  const [form, setForm] = useState({ name: "", guests: "1", alcohol: "", accommodation: "" });
+  const [form, setForm] = useState({ name: "", guests: "1", diet: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -32,7 +32,7 @@ export default function RsvpSection() {
     }
   };
 
-  const inputStyle: CSSProperties = { background: C.inputBg, border: `1px solid ${C.borderMid}`, color: C.textStrong };
+  const inputStyle: CSSProperties = { background: C.inputBg, border: `1px solid ${C.borderMid}`, color: "#3a2e1e" };
   const labelStyle: CSSProperties = { color: C.textLabel };
 
   return (
@@ -86,33 +86,24 @@ export default function RsvpSection() {
                 </select>
               </div>
               <div>
-                <label className="block font-body text-xs uppercase tracking-widest mb-2" style={labelStyle}>Пожелания по алкоголю</label>
+                <label className="block font-body text-xs uppercase tracking-widest mb-2" style={labelStyle}>Пожелания по меню</label>
                 <input
-                  value={form.alcohol}
-                  onChange={e => setForm(f => ({ ...f, alcohol: e.target.value }))}
-                  placeholder="Вино, шампанское, не пью..."
+                  value={form.diet}
+                  onChange={e => setForm(f => ({ ...f, diet: e.target.value }))}
+                  placeholder="Вегетарианское, аллергия на орехи..."
                   className="w-full rounded-xl px-4 py-3 font-body focus:outline-none transition-all"
                   style={inputStyle}
                 />
               </div>
               <div>
-                <label className="block font-body text-xs uppercase tracking-widest mb-3" style={labelStyle}>У вас есть где остановиться?</label>
-                <div className="flex gap-3">
-                  {["Да", "Нет"].map(opt => (
-                    <button
-                      key={opt}
-                      type="button"
-                      onClick={() => setForm(f => ({ ...f, accommodation: opt }))}
-                      className="flex-1 py-3 rounded-xl font-body text-sm uppercase tracking-widest transition-all duration-200"
-                      style={form.accommodation === opt
-                        ? { background: C.oliveMid, color: C.textStrong, border: `1px solid ${C.border}` }
-                        : { background: "transparent", color: C.textMuted, border: `1px solid ${C.border}` }
-                      }
-                    >
-                      {opt}
-                    </button>
-                  ))}
-                </div>
+                <label className="block font-body text-xs uppercase tracking-widest mb-2" style={labelStyle}>Пожелания молодожёнам</label>
+                <input
+                  value={form.message}
+                  onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
+                  placeholder="Напишите пожелание..."
+                  className="w-full rounded-xl px-4 py-3 font-body focus:outline-none transition-all"
+                  style={inputStyle}
+                />
               </div>
               {error && (
                 <p className="text-sm text-center" style={{ color: C.sage }}>{error}</p>
