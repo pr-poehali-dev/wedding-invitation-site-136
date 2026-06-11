@@ -24,7 +24,7 @@ export const C = {
 };
 
 export const schedule = [
-  { time: "15:30", icon: "Users",           title: "Сбор гостей",              desc: "Встреча и размещение гостей" },
+  { time: "15:30", icon: "Users",           title: "Сбор гостей",              desc: "Встреча гостей, фуршет" },
   { time: "16:00", icon: "Heart",           title: "Церемония бракосочетания", desc: "Выездная торжественная церемония" },
   { time: "16:50", icon: "UtensilsCrossed", title: "Начало банкета",            desc: "Праздничный ужин, тосты и поздравления" },
   { time: "22:00", icon: "Cake",            title: "Свадебный торт",            desc: "Торжественная подача и разрез торта" },
