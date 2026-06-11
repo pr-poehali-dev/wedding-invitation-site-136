@@ -6,7 +6,6 @@ export default function InfoSections() {
   const dateRef     = useInView(0.2);
   const scheduleRef = useInView(0.1);
   const dressRef    = useInView(0.2);
-  const mapRef      = useInView(0.2);
 
   return (
     <>
@@ -106,51 +105,6 @@ export default function InfoSections() {
         </div>
       </section>
 
-      {/* ─── MAP ─── */}
-      <section className="py-20 px-6" id="map" style={{ background: C.sectionWhite }}>
-        <div ref={mapRef.ref} className="max-w-4xl mx-auto">
-          <div className={`text-center mb-12 transition-all duration-700 ${mapRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <p className="font-body uppercase tracking-[0.3em] text-xs mb-3" style={{ color: C.textMuted }}>Как добраться</p>
-            <h2 className="font-display mb-3" style={{ fontSize: "clamp(2.5rem,6vw,4rem)", color: C.textStrong }}>Место проведения</h2>
-            <div className="section-divider mt-5" />
-            <p className="font-body text-sm mt-4" style={{ color: C.olive }}>
-              Загородный клуб «Weekend» · г. Ростов-на-Дону, ул. Левобережная, 47
-            </p>
-          </div>
-          <div className={`transition-all duration-700 delay-200 ${mapRef.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <div className="rounded-2xl overflow-hidden shadow-md" style={{ border: `1px solid ${C.border}` }}>
-              <iframe
-                title="Карта — Загородный клуб Weekend"
-                src="https://yandex.ru/map-widget/v1/?text=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2-%D0%BD%D0%B0-%D0%94%D0%BE%D0%BD%D1%83%2C+%D1%83%D0%BB.+%D0%9B%D0%B5%D0%B2%D0%BE%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F%2C+47&z=15&l=map"
-                width="100%"
-                height="420"
-                style={{ display: "block", border: "none" }}
-                allowFullScreen
-              />
-            </div>
-            <div className="mt-6 flex flex-wrap justify-center gap-4">
-              <a
-                href="https://yandex.ru/maps/?text=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2-%D0%BD%D0%B0-%D0%94%D0%BE%D0%BD%D1%83%2C+%D1%83%D0%BB.+%D0%9B%D0%B5%D0%B2%D0%BE%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F%2C+47"
-                target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-body text-sm uppercase tracking-widest transition-all hover:-translate-y-0.5"
-                style={{ background: C.oliveMid, color: C.textStrong, border: `1px solid ${C.border}` }}
-              >
-                <Icon name="MapPin" size={15} />
-                Яндекс Карты
-              </a>
-              <a
-                href="https://maps.google.com/?q=Ростов-на-Дону,+ул.+Левобережная,+47"
-                target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-body text-sm uppercase tracking-widest transition-all hover:-translate-y-0.5"
-                style={{ background: "transparent", color: C.textStrong, border: `1px solid ${C.border}` }}
-              >
-                <Icon name="Globe" size={15} />
-                Google Maps
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
     </>
   );
 }
