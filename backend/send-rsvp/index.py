@@ -25,20 +25,15 @@ def handler(event: dict, context) -> dict:
 
     name = body.get("name", "").strip()
     guests = body.get("guests", "1")
-    diet = body.get("diet", "").strip()
-    message = body.get("message", "").strip()
+    alcohol = body.get("alcohol", "").strip()
+    accommodation = body.get("accommodation", "").strip()
 
     if not name:
         return {"statusCode": 400, "headers": cors_headers, "body": json.dumps({"error": "Имя обязательно"})}
 
-    gmail_password = os.environ.get("GMAIL_APP_PASSWORD", "")
-    sender_email = "yudakhinakseniya@gmail.com"
-    receiver_email = "yudakhinakseniya@gmail.com"
-
-    diet_line = diet if diet else "не указано"
-    message_line = message if message else "не указано"
-
     guests_word = "гость" if guests == "1" else "гостя"
+    alcohol_line = alcohol if alcohol else "не указано"
+    accommodation_line = accommodation if accommodation else "не указано"
 
     html_body = f"""
     <div style="font-family: Georgia, serif; max-width: 560px; margin: 0 auto; background: #fdf8f5; padding: 40px; border-radius: 16px;">
@@ -54,12 +49,12 @@ def handler(event: dict, context) -> dict:
           <td style="padding: 12px 16px; background: #fff; border-bottom: 1px solid #f2dce2; color: #3a2530;">{guests} {guests_word}</td>
         </tr>
         <tr>
-          <td style="padding: 12px 16px; background: #fff; border-bottom: 1px solid #f2dce2; color: #9a7080; font-size: 13px;">Пожелания по меню</td>
-          <td style="padding: 12px 16px; background: #fff; border-bottom: 1px solid #f2dce2; color: #3a2530;">{diet_line}</td>
+          <td style="padding: 12px 16px; background: #fff; border-bottom: 1px solid #f2dce2; color: #9a7080; font-size: 13px;">Пожелания по алкоголю</td>
+          <td style="padding: 12px 16px; background: #fff; border-bottom: 1px solid #f2dce2; color: #3a2530;">{alcohol_line}</td>
         </tr>
         <tr>
-          <td style="padding: 12px 16px; background: #fff; border-radius: 0 0 8px 8px; color: #9a7080; font-size: 13px;">Пожелания молодожёнам</td>
-          <td style="padding: 12px 16px; background: #fff; border-radius: 0 0 8px 8px; color: #3a2530; font-style: italic;">{message_line}</td>
+          <td style="padding: 12px 16px; background: #fff; border-radius: 0 0 8px 8px; color: #9a7080; font-size: 13px;">Есть где остановиться</td>
+          <td style="padding: 12px 16px; background: #fff; border-radius: 0 0 8px 8px; color: #3a2530;">{accommodation_line}</td>
         </tr>
       </table>
       <p style="color: #c9a0ae; font-size: 12px; text-align: center; margin-top: 32px;">Свадебный сайт Игоря &amp; Ксении</p>
@@ -68,24 +63,25 @@ def handler(event: dict, context) -> dict:
 
     msg = MIMEMultipart("alternative")
     msg["Subject"] = f"💌 RSVP от {name} — Свадьба 30.08.2026"
-    msg["From"] = sender_email
-    msg["To"] = receiver_email
+    msg["From"] = "yudakhinakseniya@gmail.com"
+    msg["To"] = "yudakhinakseniya@gmail.com"
     msg.attach(MIMEText(html_body, "html"))
+
+    name_s = name.replace("'", "''")
+    alcohol_s = ("'" + alcohol.replace("'", "''") + "'") if alcohol else "NULL"
+    accommodation_s = ("'" + accommodation.replace("'", "''") + "'") if accommodation else "NULL"
 
     conn = psycopg2.connect(os.environ["DATABASE_URL"])
     cur = conn.cursor()
-    name_s = name.replace("'", "''")
-    diet_s = ("'" + diet.replace("'", "''") + "'") if diet else "NULL"
-    message_s = ("'" + message.replace("'", "''") + "'") if message else "NULL"
-    cur.execute(f"INSERT INTO rsvp (name, guests, diet, message) VALUES ('{name_s}', {int(guests)}, {diet_s}, {message_s})")
+    cur.execute(f"INSERT INTO rsvp (name, guests, alcohol, accommodation) VALUES ('{name_s}', {int(guests)}, {alcohol_s}, {accommodation_s})")
     conn.commit()
     cur.close()
     conn.close()
 
     try:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-            server.login(sender_email, gmail_password)
-            server.sendmail(sender_email, receiver_email, msg.as_string())
+            server.login("yudakhinakseniya@gmail.com", os.environ.get("GMAIL_APP_PASSWORD", ""))
+            server.sendmail("yudakhinakseniya@gmail.com", "yudakhinakseniya@gmail.com", msg.as_string())
     except Exception as e:
         return {"statusCode": 500, "headers": cors_headers, "body": json.dumps({"error": f"Ошибка отправки: {str(e)}"})}
 
