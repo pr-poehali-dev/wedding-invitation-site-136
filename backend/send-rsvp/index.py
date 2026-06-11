@@ -3,10 +3,11 @@ import os
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import psycopg2
 
 
 def handler(event: dict, context) -> dict:
-    """Принимает RSVP-анкету гостя и отправляет её на почту невесты."""
+    """Принимает RSVP-анкету гостя, сохраняет в БД и отправляет на почту невесты."""
 
     cors_headers = {
         "Access-Control-Allow-Origin": "*",
@@ -70,6 +71,16 @@ def handler(event: dict, context) -> dict:
     msg["From"] = sender_email
     msg["To"] = receiver_email
     msg.attach(MIMEText(html_body, "html"))
+
+    conn = psycopg2.connect(os.environ["DATABASE_URL"])
+    cur = conn.cursor()
+    name_s = name.replace("'", "''")
+    diet_s = ("'" + diet.replace("'", "''") + "'") if diet else "NULL"
+    message_s = ("'" + message.replace("'", "''") + "'") if message else "NULL"
+    cur.execute(f"INSERT INTO rsvp (name, guests, diet, message) VALUES ('{name_s}', {int(guests)}, {diet_s}, {message_s})")
+    conn.commit()
+    cur.close()
+    conn.close()
 
     try:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
