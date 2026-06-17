@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-export const WEDDING_DATE = new Date("2026-08-30T16:00:00");
+export const WEDDING_DATE = new Date("2026-08-30T16:00:00+03:00");
 export const RSVP_URL = "https://functions.poehali.dev/0dd5b90c-d39e-490c-a1f6-c76af69c88e5";
 
 export const BG_IMAGE = "https://cdn.poehali.dev/projects/32140290-44a5-4820-9999-7685a86ac4f3/files/954c0db7-b763-4291-8c91-8007ceda3764.jpg";
